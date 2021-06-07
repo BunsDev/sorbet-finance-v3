@@ -50,7 +50,9 @@ interface FailedCall extends SwapCallEstimate {
 function useSwapCallArguments(
   trade: V2Trade<Currency, Currency, TradeType> | undefined, // trade to execute, required
   allowedSlippage: Percent, // in bips
-  recipientAddressOrName: string | null // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
+  recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  signatureData: SignatureData | null | undefined
 ): SwapCall[] {
   const { account, chainId, library } = useActiveWeb3React()
 
