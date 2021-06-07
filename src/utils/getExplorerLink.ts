@@ -1,11 +1,3 @@
-const ETHERSCAN_PREFIXES: { [chainId: number]: string } = {
-  1: '',
-  3: 'ropsten.',
-  4: 'rinkeby.',
-  5: 'goerli.',
-  42: 'kovan.',
-}
-
 export enum ExplorerDataType {
   TRANSACTION = 'transaction',
   TOKEN = 'token',

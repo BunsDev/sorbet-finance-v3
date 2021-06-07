@@ -138,7 +138,8 @@
     "start": "yarn compile-contract-types && react-scripts start",
     "storybook": "start-storybook -p 6006",
     "test": "react-scripts test --env=jsdom",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint --cache ."
   },
   "eslintConfig": {
     "extends": "react-app",

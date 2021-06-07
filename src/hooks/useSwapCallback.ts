@@ -2,7 +2,6 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { Router, Trade as V2Trade } from '@uniswap/v2-sdk'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
 import { useMemo } from 'react'
-import { SWAP_ROUTER_ADDRESSES } from '../constants/addresses'
 import { calculateGasMargin } from '../utils/calculateGasMargin'
 import { getTradeVersion } from '../utils/getTradeVersion'
 import { useTransactionAdder } from '../state/transactions/hooks'
@@ -51,8 +50,7 @@ interface FailedCall extends SwapCallEstimate {
 function useSwapCallArguments(
   trade: V2Trade<Currency, Currency, TradeType> | undefined, // trade to execute, required
   allowedSlippage: Percent, // in bips
-  recipientAddressOrName: string | null, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
-  signatureData: SignatureData | null | undefined
+  recipientAddressOrName: string | null // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
 ): SwapCall[] {
   const { account, chainId, library } = useActiveWeb3React()
 

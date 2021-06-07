@@ -129,28 +129,28 @@ const AccountElement = styled.div<{ active: boolean }>`
   }
 `
 
-const UNIAmount = styled(AccountElement)`
-  color: white;
-  padding: 4px 8px;
-  height: 36px;
-  font-weight: 500;
-  background-color: ${({ theme }) => theme.bg3};
-  background: radial-gradient(174.47% 188.91% at 1.84% 0%, #ff007a 0%, #2172e5 100%), #edeef2;
-`
+// const UNIAmount = styled(AccountElement)`
+//   color: white;
+//   padding: 4px 8px;
+//   height: 36px;
+//   font-weight: 500;
+//   background-color: ${({ theme }) => theme.bg3};
+//   background: radial-gradient(174.47% 188.91% at 1.84% 0%, #ff007a 0%, #2172e5 100%), #edeef2;
+// `
 
-const UNIWrapper = styled.span`
-  width: fit-content;
-  position: relative;
-  cursor: pointer;
+// const UNIWrapper = styled.span`
+//   width: fit-content;
+//   position: relative;
+//   cursor: pointer;
 
-  :hover {
-    opacity: 0.8;
-  }
+//   :hover {
+//     opacity: 0.8;
+//   }
 
-  :active {
-    opacity: 0.9;
-  }
-`
+//   :active {
+//     opacity: 0.9;
+//   }
+// `
 
 const HideSmall = styled.span`
   ${({ theme }) => theme.mediaWidth.upToSmall`
@@ -177,26 +177,26 @@ const BalanceText = styled(Text)`
   `};
 `
 
-const Title = styled.a`
-  display: flex;
-  align-items: center;
-  pointer-events: auto;
-  justify-self: flex-start;
-  margin-right: 12px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    justify-self: center;
-  `};
-  :hover {
-    cursor: pointer;
-  }
-`
+// const Title = styled.a`
+//   display: flex;
+//   align-items: center;
+//   pointer-events: auto;
+//   justify-self: flex-start;
+//   margin-right: 12px;
+//   ${({ theme }) => theme.mediaWidth.upToSmall`
+//     justify-self: center;
+//   `};
+//   :hover {
+//     cursor: pointer;
+//   }
+// `
 
-const UniIcon = styled.div`
-  transition: transform 0.3s ease;
-  :hover {
-    transform: rotate(-5deg);
-  }
-`
+// const UniIcon = styled.div`
+//   transition: transform 0.3s ease;
+//   :hover {
+//     transform: rotate(-5deg);
+//   }
+// `
 
 const activeClassName = 'ACTIVE'
 

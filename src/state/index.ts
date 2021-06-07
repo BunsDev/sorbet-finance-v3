@@ -30,10 +30,7 @@ const store = configureStore({
     lists,
     ...gelatoReducers,
   },
-  middleware: [
-    // ...getDefaultMiddleware({ thunk: false }),
-    save({ states: PERSISTED_KEYS, debounce: 1000 }),
-  ],
+  middleware: [...getDefaultMiddleware({ thunk: false }), save({ states: PERSISTED_KEYS, debounce: 1000 })],
   preloadedState: load({ states: PERSISTED_KEYS }),
 })
 

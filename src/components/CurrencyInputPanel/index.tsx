@@ -1,6 +1,5 @@
-import { Pair, Trade } from '@uniswap/v2-sdk'
-import JSBI from 'jsbi'
-import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core'
+import { Pair } from '@uniswap/v2-sdk'
+import { Currency, CurrencyAmount, Percent, Token } from '@uniswap/sdk-core'
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components/macro'
 import { darken } from 'polished'

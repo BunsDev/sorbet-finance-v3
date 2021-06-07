@@ -1,6 +1,5 @@
 import JSBI from 'jsbi'
 import { Trade as V3Trade } from '@uniswap/v3-sdk'
-import { useBestV3TradeExactIn, useBestV3TradeExactOut, V3TradeState } from '../../hooks/useBestV3Trade'
 import useENS from '../../hooks/useENS'
 import { parseUnits } from '@ethersproject/units'
 import { Currency, CurrencyAmount, Percent, TradeType } from '@uniswap/sdk-core'
@@ -19,7 +18,6 @@ import { AppDispatch, AppState } from '../index'
 import { useCurrencyBalances } from '../wallet/hooks'
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
 import { SwapState } from './reducer'
-import { useUserSingleHopOnly } from 'state/user/hooks'
 
 export function applyExchangeRateTo(
   inputValue: string,

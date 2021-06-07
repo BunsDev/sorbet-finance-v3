@@ -19,9 +19,8 @@ import TransactionUpdater from './state/transactions/updater'
 import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
-import { GelatoProviderStore, getReact } from '@gelatonetwork/limit-orders-react'
+import { GelatoProviderStore } from '@gelatonetwork/limit-orders-react'
 import { useActiveWeb3React } from 'hooks/web3'
-import { Store } from '@reduxjs/toolkit'
 import useTheme from 'hooks/useTheme'
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
@@ -62,7 +61,7 @@ function Updaters() {
   )
 }
 
-function Gelato({ children, store }: { children?: React.ReactNode; store: Store }) {
+function Gelato({ children }: { children?: React.ReactNode }) {
   const { library, chainId, account } = useActiveWeb3React()
   const theme = useTheme()
   return (
@@ -84,7 +83,7 @@ ReactDOM.render(
 
               <ThemedGlobalStyle />
               <HashRouter>
-                <Gelato store={store}>
+                <Gelato>
                   <App />
                 </Gelato>
               </HashRouter>
