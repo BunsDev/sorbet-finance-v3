@@ -12,6 +12,7 @@ import lists from './lists/reducer'
 import burn from './burn/reducer'
 import burnV3 from './burn/v3/reducer'
 import multicall from './multicall/reducer'
+import { gelatoReducers } from '@gelatonetwork/limit-orders-react'
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists']
 
@@ -27,6 +28,7 @@ const store = configureStore({
     burnV3,
     multicall,
     lists,
+    ...gelatoReducers,
   },
   middleware: [
     // ...getDefaultMiddleware({ thunk: false }),

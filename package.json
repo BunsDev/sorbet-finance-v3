@@ -6,6 +6,8 @@
   "devDependencies": {
     "@emotion/core": "^11.0.0",
     "@ethersproject/experimental": "^5.0.1",
+    "@gelatonetwork/limit-orders-lib": "^0.6.5",
+    "@gelatonetwork/limit-orders-react": "^0.0.1-4",
     "@popperjs/core": "^2.4.4",
     "@reach/dialog": "^0.10.3",
     "@reach/portal": "^0.10.3",
@@ -126,7 +128,7 @@
     "**/styled-components": "^4.2.0"
   },
   "scripts": {
-    "prestart": "npx npm-link-shared ./node_modules/@gelatonetwork/limit-orders-react/node_modules . react",
+    
     "compile-contract-types": "yarn compile-external-abi-types && yarn compile-v3-contract-types",
     "compile-external-abi-types": "typechain --target ethers-v5 --out-dir src/abis/types './src/abis/**/*.json'",
     "compile-v3-contract-types": "typechain --target ethers-v5 --out-dir src/types/v3 './node_modules/@uniswap/?(v3-core|v3-periphery)/artifacts/contracts/**/*.json'",

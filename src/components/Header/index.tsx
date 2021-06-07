@@ -322,10 +322,10 @@ export default function Header() {
         <StyledNavLink id={`limit-order-nav-link`} to={'/limit-order'}>
           Limit Order
         </StyledNavLink>
-        <StyledNavLink id={`stake-nav-link`} to={''}>
+        <StyledNavLink id={`stake-nav-link`} to={'/dca'}>
           DCA
         </StyledNavLink>
-        <StyledExternalLink id={`stake-nav-link`} href={''}>
+        <StyledExternalLink id={`stake-nav-link`} href={'/automated-pools'} disabled={true}>
           Automated Pools (soon)
         </StyledExternalLink>
       </HeaderLinks>
