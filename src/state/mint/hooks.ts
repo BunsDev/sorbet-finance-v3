@@ -18,9 +18,7 @@ export function useMintState(): AppState['mint'] {
   return useSelector<AppState, AppState['mint']>((state) => state.mint)
 }
 
-export function useMintActionHandlers(
-  noLiquidity: boolean | undefined
-): {
+export function useMintActionHandlers(noLiquidity: boolean | undefined): {
   onFieldAInput: (typedValue: string) => void
   onFieldBInput: (typedValue: string) => void
 } {
@@ -123,7 +121,7 @@ export function useDerivedMintInfo(
             ? pair.priceOf(tokenA).quote(wrappedIndependentAmount)
             : pair.priceOf(tokenB).quote(wrappedIndependentAmount)
         return dependentCurrency?.isNative
-          ? CurrencyAmount.ether(dependentCurrency.chainId, dependentTokenAmount.quotient)
+          ? CurrencyAmount.fromRawAmount(dependentCurrency, dependentTokenAmount.quotient)
           : dependentTokenAmount
       }
       return undefined
@@ -149,7 +147,9 @@ export function useDerivedMintInfo(
       return undefined
     } else {
       const wrappedCurrencyA = currencyA?.wrapped
-      return pair && wrappedCurrencyA ? pair.priceOf(wrappedCurrencyA) : undefined
+      return pair && wrappedCurrencyA
+        ? (pair.priceOf(wrappedCurrencyA) as unknown as Price<Currency, Currency>)
+        : undefined
     }
   }, [currencyA, noLiquidity, pair, parsedAmounts])
 

@@ -1,6 +1,6 @@
 {
   "name": "@uniswap/interface",
-  "description": "Uniswap Interface",
+  "description": "Sorbet Interface",
   "homepage": ".",
   "private": true,
   "devDependencies": {
@@ -48,7 +48,7 @@
     "@uniswap/token-lists": "^1.0.0-beta.19",
     "@uniswap/v2-core": "1.0.0",
     "@uniswap/v2-periphery": "^1.1.0-beta.0",
-    "@uniswap/v2-sdk": "^3.0.0-alpha.1",
+    "@uniswap/v2-sdk": "^3.0.0-alpha.2",
     "@uniswap/v3-core": "1.0.0",
     "@uniswap/v3-periphery": "1.0.0",
     "@uniswap/v3-sdk": "^3.0.0-alpha.7",
@@ -83,7 +83,10 @@
     "polished": "^3.3.2",
     "prettier": "^2.2.1",
     "qs": "^6.9.4",
+    "quickswap-sdk": "^3.0.8",
     "react": "^17.0.1",
+    "react-app-rewire-alias": "^1.0.3",
+    "react-app-rewired": "^2.1.8",
     "react-confetti": "^6.0.0",
     "react-device-detect": "^1.6.2",
     "react-dom": "^17.0.1",
@@ -117,9 +120,13 @@
     "workbox-strategies": "^6.1.0"
   },
   "resolutions": {
-    "@walletconnect/web3-provider": "1.4.2-rc.2"
+    "@walletconnect/web3-provider": "1.4.2-rc.2",
+    "**/react": "^17.0.1",
+    "**/react-dom": "^17.0.1",
+    "**/styled-components": "^4.2.0"
   },
   "scripts": {
+    "prestart": "npx npm-link-shared ./node_modules/@gelatonetwork/limit-orders-react/node_modules . react",
     "compile-contract-types": "yarn compile-external-abi-types && yarn compile-v3-contract-types",
     "compile-external-abi-types": "typechain --target ethers-v5 --out-dir src/abis/types './src/abis/**/*.json'",
     "compile-v3-contract-types": "typechain --target ethers-v5 --out-dir src/types/v3 './node_modules/@uniswap/?(v3-core|v3-periphery)/artifacts/contracts/**/*.json'",
@@ -128,7 +135,8 @@
     "postinstall": "yarn compile-contract-types",
     "start": "yarn compile-contract-types && react-scripts start",
     "storybook": "start-storybook -p 6006",
-    "test": "react-scripts test --env=jsdom"
+    "test": "react-scripts test --env=jsdom",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -148,6 +156,5 @@
       "last 1 safari version"
     ]
   },
-  "license": "GPL-3.0-or-later",
-  "dependencies": {}
+  "license": "GPL-3.0-or-later"
 }

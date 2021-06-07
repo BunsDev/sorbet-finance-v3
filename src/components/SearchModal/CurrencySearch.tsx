@@ -5,7 +5,13 @@ import { useTranslation } from 'react-i18next'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
 import { useActiveWeb3React } from '../../hooks/web3'
-import { useAllTokens, useToken, useIsUserAddedToken, useSearchInactiveTokenLists } from '../../hooks/Tokens'
+import {
+  useAllTokens,
+  useToken,
+  useIsUserAddedToken,
+  useSearchInactiveTokenLists,
+  useCurrency,
+} from '../../hooks/Tokens'
 import { CloseIcon, TYPE, ButtonText, IconWrapper } from '../../theme'
 import { isAddress } from '../../utils'
 import Column from '../Column'
@@ -106,7 +112,7 @@ export function CurrencySearch({
 
   const filteredSortedTokens = useSortedTokensByQuery(sortedTokens, debouncedQuery)
 
-  const ether = useMemo(() => chainId && Ether.onChain(chainId), [chainId])
+  const ether = useCurrency('NATIVE', chainId)
 
   const filteredSortedTokensWithETH: Currency[] = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()

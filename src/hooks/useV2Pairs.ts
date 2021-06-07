@@ -3,7 +3,8 @@ import { useMemo } from 'react'
 import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json'
 import { Interface } from '@ethersproject/abi'
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
-import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
+import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
+import { Pair as QuickswapPair } from 'quickswap-sdk'
 
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
 
@@ -14,15 +15,24 @@ export enum PairState {
   INVALID,
 }
 
+const getPairAddress = (tokenA: Token, tokenB: Token): string | undefined => {
+  if (tokenA.chainId === 137 && tokenB.chainId === 137) {
+    return QuickswapPair.getAddress(tokenA as any, tokenB as any)
+  } else if (tokenA.chainId !== 137 && tokenB.chainId !== 137) {
+    return Pair.getAddress(tokenA, tokenB)
+  } else return undefined
+}
+
 export function useV2Pairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {
-  const tokens = useMemo(() => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]), [
-    currencies,
-  ])
+  const tokens = useMemo(
+    () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
+    [currencies]
+  )
 
   const pairAddresses = useMemo(
     () =>
       tokens.map(([tokenA, tokenB]) => {
-        return tokenA && tokenB && !tokenA.equals(tokenB) ? Pair.getAddress(tokenA, tokenB) : undefined
+        return tokenA && tokenB && !tokenA.equals(tokenB) ? getPairAddress(tokenA, tokenB) : undefined
       }),
     [tokens]
   )

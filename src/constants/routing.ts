@@ -1,6 +1,23 @@
 // a list of tokens by chain
 import { Currency, Ether, Token, WETH9 } from '@uniswap/sdk-core'
-import { AMPL, DAI, FEI, FRAX, FXS, MIR, renBTC, TRIBE, UMA, UNI, USDC, USDT, UST, WBTC } from './tokens'
+import {
+  AMPL,
+  DAI,
+  FEI,
+  FRAX,
+  FXS,
+  MATIC_BASES,
+  MIR,
+  renBTC,
+  TRIBE,
+  UMA,
+  UNI,
+  USDC,
+  USDT,
+  UST,
+  WBTC,
+  WETH_MATIC,
+} from './tokens'
 
 type ChainTokenList = {
   readonly [chainId: number]: Token[]
@@ -36,11 +53,13 @@ const WETH_ONLY: ChainTokenList = {
   [4]: [WETH9[4]],
   [5]: [WETH9[5]],
   [42]: [WETH9[42]],
+  [137]: [WETH_MATIC],
 }
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
+  [137]: MATIC_BASES,
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   [1]: {
@@ -68,12 +87,15 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainCurrencyList = {
   [1]: [Ether.onChain(1), DAI, USDC, USDT, WBTC],
+  [137]: MATIC_BASES,
 }
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
+  [127]: MATIC_BASES,
 }
+
 export const PINNED_PAIRS: { readonly [chainId: number]: [Token, Token][] } = {
   [1]: [
     [

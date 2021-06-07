@@ -20,7 +20,10 @@ export enum ExplorerDataType {
  * @param type the type of the data
  */
 export function getExplorerLink(chainId: number, data: string, type: ExplorerDataType): string {
-  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] ?? ''}etherscan.io`
+  let prefix
+  if (chainId === 1) prefix = `https://etherscan.io`
+  else if (chainId === 3) prefix = `https://ropsten.etherscan.io`
+  else if (chainId === 37) prefix = `https://explorer-mainnet.maticvigil.com`
 
   switch (type) {
     case ExplorerDataType.TRANSACTION: {

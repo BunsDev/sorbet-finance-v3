@@ -2,11 +2,15 @@ import React from 'react'
 import { FeeAmount } from '@uniswap/v3-sdk'
 import { useTranslation } from 'react-i18next'
 import { AutoColumn } from 'components/Column'
-import { DynamicSection } from 'pages/AddLiquidity/styled'
 import { TYPE } from 'theme'
 import { RowBetween } from 'components/Row'
 import { ButtonRadioChecked } from 'components/Button'
 import styled from 'styled-components/macro'
+
+export const DynamicSection = styled(AutoColumn)<{ disabled?: boolean }>`
+  opacity: ${({ disabled }) => (disabled ? '0.3' : '1')};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'initial')};
+`
 
 const ResponsiveText = styled(TYPE.label)`
   ${({ theme }) => theme.mediaWidth.upToSmall`

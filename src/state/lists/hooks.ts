@@ -53,6 +53,7 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
     [3]: { ...map1[3], ...map2[3] },
     [42]: { ...map1[42], ...map2[42] },
     [5]: { ...map1[5], ...map2[5] },
+    [137]: { ...map1[137], ...map2[137] },
   }
 }
 
@@ -109,10 +110,10 @@ export function useUnsupportedTokenList(): TokenAddressMap {
   const loadedUnsupportedListMap = useCombinedTokenMapFromUrls(UNSUPPORTED_LIST_URLS)
 
   // format into one token address map
-  return useMemo(() => combineMaps(localUnsupportedListMap, loadedUnsupportedListMap), [
-    localUnsupportedListMap,
-    loadedUnsupportedListMap,
-  ])
+  return useMemo(
+    () => combineMaps(localUnsupportedListMap, loadedUnsupportedListMap),
+    [localUnsupportedListMap, loadedUnsupportedListMap]
+  )
 }
 
 export function useIsListActive(url: string): boolean {

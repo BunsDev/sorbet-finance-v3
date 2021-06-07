@@ -1,5 +1,5 @@
 import { parseBytes32String } from '@ethersproject/strings'
-import { Currency, Ether, Token } from '@uniswap/sdk-core'
+import { Currency, NativeCurrency, Token, Ether } from '@uniswap/sdk-core'
 import { arrayify } from 'ethers/lib/utils'
 import { useMemo } from 'react'
 import { createTokenFilterFunction } from '../components/SearchModal/filtering'
@@ -12,6 +12,32 @@ import { TokenAddressMap, useUnsupportedTokenList } from './../state/lists/hooks
 
 import { useActiveWeb3React } from './web3'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
+import invariant from 'tiny-invariant'
+import { WMATIC_MATIC } from 'constants/tokens'
+
+export const WETH9: { [chainId: number]: Token } = {
+  [1]: new Token(1, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH9', 'Wrapped Ether'),
+  [3]: new Token(3, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH9', 'Wrapped Ether'),
+  [4]: new Token(4, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH9', 'Wrapped Ether'),
+  [5]: new Token(5, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH9', 'Wrapped Ether'),
+  [42]: new Token(42, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH9', 'Wrapped Ether'),
+}
+
+export class NativeToken extends NativeCurrency {
+  public constructor(chainId: number, decimals: number, symbol: string, name: string) {
+    super(chainId, decimals, symbol, name)
+  }
+
+  public get wrapped(): Token {
+    const weth9 = this.chainId === 137 ? WMATIC_MATIC : WETH9[this.chainId]
+    invariant(!!weth9, 'WRAPPED')
+    return weth9
+  }
+
+  public equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId
+  }
+}
 
 // reduce token map into standard address <-> Token mapping, optionally include user added tokens
 function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean): { [address: string]: Token } {
@@ -20,6 +46,7 @@ function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean):
 
   return useMemo(() => {
     if (!chainId) return {}
+    if (!tokenMap[chainId]) return {}
 
     // reduce to just tokens
     const mapWithoutUrls = Object.keys(tokenMap[chainId]).reduce<{ [address: string]: Token }>((newMap, address) => {
@@ -128,10 +155,12 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
   const address = isAddress(tokenAddress)
 
   const tokenContract = useTokenContract(address ? address : undefined, false)
+
   const tokenContractBytes32 = useBytes32TokenContract(address ? address : undefined, false)
   const token: Token | undefined = address ? tokens[address] : undefined
 
   const tokenName = useSingleCallResult(token ? undefined : tokenContract, 'name', undefined, NEVER_RELOAD)
+
   const tokenNameBytes32 = useSingleCallResult(
     token ? undefined : tokenContractBytes32,
     'name',
@@ -171,9 +200,14 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
   ])
 }
 
-export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
-  const { chainId } = useActiveWeb3React()
+export function useCurrency(currencyId: string | undefined, chainId?: number): Currency | null | undefined {
   const isETH = currencyId?.toUpperCase() === 'ETH'
+  const isMATIC = currencyId?.toUpperCase() === 'MATIC'
+  const isNative =
+    currencyId?.toUpperCase() === 'NATIVE' || currencyId?.toLowerCase() === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+  const isNativeCurrency = isETH || isMATIC || isNative
   const token = useToken(isETH ? undefined : currencyId)
-  return isETH ? (chainId ? Ether.onChain(chainId) : undefined) : token
+  if (isNativeCurrency && chainId)
+    return chainId === 137 ? new NativeToken(chainId, 18, 'MATIC', 'Matic') : Ether.onChain(chainId)
+  else return token
 }

@@ -1,5 +1,6 @@
-import { Pair } from '@uniswap/v2-sdk'
-import { Currency, CurrencyAmount, Percent, Token } from '@uniswap/sdk-core'
+import { Pair, Trade } from '@uniswap/v2-sdk'
+import JSBI from 'jsbi'
+import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core'
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components/macro'
 import { darken } from 'polished'
@@ -19,6 +20,9 @@ import { Lock } from 'react-feather'
 import { AutoColumn } from 'components/Column'
 import { FiatValue } from './FiatValue'
 import { formatTokenAmount } from 'utils/formatTokenAmount'
+import { MouseoverTooltip } from 'components/Tooltip'
+import HoverInlineText from 'components/HoverInlineText'
+import { formatUnits } from 'ethers/lib/utils'
 
 const InputPanel = styled.div<{ hideInput?: boolean }>`
   ${({ theme }) => theme.flexColumnNoWrap}
@@ -162,6 +166,12 @@ interface CurrencyInputPanelProps {
   showCommonBases?: boolean
   customBalanceText?: string
   locked?: boolean
+  showCurrencySelector?: boolean
+  showRate?: boolean
+  currentMarketRate?: string
+  isInvertedRate?: boolean
+  realExecutionRate?: string
+  gasPrice?: number
 }
 
 export default function CurrencyInputPanel({
@@ -181,6 +191,12 @@ export default function CurrencyInputPanel({
   pair = null, // used for double token logo
   hideInput = false,
   locked = false,
+  showCurrencySelector = true,
+  showRate = false,
+  currentMarketRate,
+  isInvertedRate = false,
+  realExecutionRate,
+  gasPrice,
   ...rest
 }: CurrencyInputPanelProps) {
   const { t } = useTranslation()
@@ -193,6 +209,27 @@ export default function CurrencyInputPanel({
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)
   }, [setModalOpen])
+
+  const rate =
+    currency && otherCurrency
+      ? `1 ${isInvertedRate ? otherCurrency?.symbol : currency?.symbol} = ${value} ${
+          isInvertedRate ? currency?.symbol : otherCurrency?.symbol
+        }`
+      : undefined
+
+  const currentMarketRateExplainer =
+    currency && otherCurrency && currentMarketRate
+      ? `1 ${isInvertedRate ? otherCurrency?.symbol : currency?.symbol}= ${currentMarketRate} ${
+          isInvertedRate ? currency?.symbol : otherCurrency?.symbol
+        }`
+      : undefined
+
+  const realExecutionRateExplainer =
+    currency && otherCurrency && realExecutionRate
+      ? `1 ${isInvertedRate ? otherCurrency?.symbol : currency?.symbol} = ${realExecutionRate} ${
+          isInvertedRate ? currency?.symbol : otherCurrency?.symbol
+        }`
+      : undefined
 
   return (
     <InputPanel id={id} hideInput={hideInput} {...rest}>
@@ -208,55 +245,68 @@ export default function CurrencyInputPanel({
       )}
       <Container hideInput={hideInput}>
         <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={!onCurrencySelect}>
-          <CurrencySelect
-            selected={!!currency}
-            hideInput={hideInput}
-            className="open-currency-select-button"
-            onClick={() => {
-              if (onCurrencySelect) {
-                setModalOpen(true)
-              }
-            }}
-          >
-            <Aligner>
-              <RowFixed>
-                {pair ? (
-                  <span style={{ marginRight: '0.5rem' }}>
-                    <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={24} margin={true} />
-                  </span>
-                ) : currency ? (
-                  <CurrencyLogo style={{ marginRight: '0.5rem' }} currency={currency} size={'24px'} />
-                ) : null}
-                {pair ? (
-                  <StyledTokenName className="pair-name-container">
-                    {pair?.token0.symbol}:{pair?.token1.symbol}
-                  </StyledTokenName>
-                ) : (
-                  <StyledTokenName className="token-symbol-container" active={Boolean(currency && currency.symbol)}>
-                    {(currency && currency.symbol && currency.symbol.length > 20
-                      ? currency.symbol.slice(0, 4) +
-                        '...' +
-                        currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
-                      : currency?.symbol) || t('selectToken')}
-                  </StyledTokenName>
-                )}
-              </RowFixed>
-              {onCurrencySelect && <StyledDropDown selected={!!currency} />}
-            </Aligner>
-          </CurrencySelect>
+          {showCurrencySelector ? (
+            <CurrencySelect
+              selected={!!currency}
+              hideInput={hideInput}
+              className="open-currency-select-button"
+              onClick={() => {
+                if (onCurrencySelect) {
+                  setModalOpen(true)
+                }
+              }}
+            >
+              <Aligner>
+                <RowFixed>
+                  {pair ? (
+                    <span style={{ marginRight: '0.5rem' }}>
+                      <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={24} margin={true} />
+                    </span>
+                  ) : currency ? (
+                    <CurrencyLogo style={{ marginRight: '0.5rem' }} currency={currency} size={'24px'} />
+                  ) : null}
+                  {pair ? (
+                    <StyledTokenName className="pair-name-container">
+                      {pair?.token0.symbol}:{pair?.token1.symbol}
+                    </StyledTokenName>
+                  ) : (
+                    <StyledTokenName className="token-symbol-container" active={Boolean(currency && currency.symbol)}>
+                      {(currency && currency.symbol && currency.symbol.length > 20
+                        ? currency.symbol.slice(0, 4) +
+                          '...' +
+                          currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
+                        : currency?.symbol) || t('selectToken')}
+                    </StyledTokenName>
+                  )}
+                </RowFixed>
+                {onCurrencySelect && <StyledDropDown selected={!!currency} />}
+              </Aligner>
+            </CurrencySelect>
+          ) : null}
+
+          {showRate && (
+            <RowFixed style={{ height: '17px' }}>
+              <MouseoverTooltip
+                text={`Desired rate at which you want your order to be executed. Defines the minimum amount you will receive. ${
+                  rate ? rate + '.' : ''
+                }`}
+              >
+                <TYPE.main>{'Desired rate'}</TYPE.main>
+              </MouseoverTooltip>
+            </RowFixed>
+          )}
+
           {!hideInput && (
-            <>
-              <NumericalInput
-                className="token-amount-input"
-                value={value}
-                onUserInput={(val) => {
-                  onUserInput(val)
-                }}
-              />
-            </>
+            <NumericalInput
+              className="token-amount-input"
+              value={value}
+              onUserInput={(val) => {
+                onUserInput(val)
+              }}
+            />
           )}
         </InputRow>
-        {!hideInput && !hideBalance && (
+        {!hideInput && !hideBalance && !showRate && (
           <FiatRow>
             <RowBetween>
               {account ? (
@@ -285,6 +335,85 @@ export default function CurrencyInputPanel({
               <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />
             </RowBetween>
           </FiatRow>
+        )}
+
+        {showRate && value && currency && otherCurrency && (
+          <>
+            <FiatRow>
+              <RowBetween>
+                {currency && otherCurrency ? (
+                  <MouseoverTooltip
+                    text={`The actual execution rate. Takes into account the gas necessary to execute your order and guarantees that your desired rate is fulfilled. It fluctuates according to gas price. ${
+                      rate ? 'Will execute when ' + realExecutionRateExplainer + '.' : ''
+                    }`}
+                  >
+                    <TYPE.body
+                      onClick={onMax}
+                      color={theme.text2}
+                      fontWeight={400}
+                      fontSize={14}
+                      style={{ display: 'inline', cursor: 'pointer' }}
+                    >
+                      {'Actual execution rate (?)'}
+                    </TYPE.body>
+                  </MouseoverTooltip>
+                ) : (
+                  '-'
+                )}
+
+                <MouseoverTooltip text={realExecutionRateExplainer ? realExecutionRateExplainer : ''}>
+                  <TYPE.body fontSize={14} color={realExecutionRate ? theme.text2 : theme.text4}>
+                    {realExecutionRate ? '~' : ''}
+                    <HoverInlineText text={realExecutionRate ? realExecutionRate : '-'} />
+                  </TYPE.body>
+                </MouseoverTooltip>
+              </RowBetween>
+            </FiatRow>
+            <FiatRow>
+              <RowBetween>
+                {currency && otherCurrency ? (
+                  <TYPE.body
+                    onClick={onMax}
+                    color={theme.text2}
+                    fontWeight={400}
+                    fontSize={14}
+                    style={{ display: 'inline', cursor: 'pointer' }}
+                  >
+                    {'Current market rate'}
+                  </TYPE.body>
+                ) : (
+                  '-'
+                )}
+                <MouseoverTooltip text={currentMarketRateExplainer ? currentMarketRateExplainer : ''}>
+                  <TYPE.body fontSize={14} color={currentMarketRate ? theme.text2 : theme.text4}>
+                    {currentMarketRate ? '~' : ''}
+                    <HoverInlineText text={currentMarketRate ? currentMarketRate : '-'} />
+                  </TYPE.body>
+                </MouseoverTooltip>
+              </RowBetween>
+            </FiatRow>
+            <FiatRow>
+              <RowBetween>
+                {currency && otherCurrency ? (
+                  <TYPE.body
+                    onClick={onMax}
+                    color={theme.text2}
+                    fontWeight={400}
+                    fontSize={14}
+                    style={{ display: 'inline', cursor: 'pointer' }}
+                  >
+                    {'Current gas price'}
+                  </TYPE.body>
+                ) : (
+                  '-'
+                )}
+                <TYPE.body fontSize={14} color={fiatValue ? theme.text2 : theme.text4}>
+                  <HoverInlineText text={gasPrice ? parseFloat(formatUnits(gasPrice, 'gwei')).toFixed(0) : '-'} />
+                  {' GWEI'}
+                </TYPE.body>
+              </RowBetween>
+            </FiatRow>
+          </>
         )}
       </Container>
       {onCurrencySelect && (

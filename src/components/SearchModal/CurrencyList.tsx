@@ -210,7 +210,8 @@ export default function CurrencyList({
       const otherSelected = Boolean(currency && otherCurrency && otherCurrency.equals(currency))
       const handleSelect = () => currency && onCurrencySelect(currency)
 
-      const token = currency?.wrapped
+      // TODO: fix native multi chain
+      const token = currency.isNative ? undefined : currency?.wrapped
 
       const showImport = index > currencies.length
 

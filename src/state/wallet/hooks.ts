@@ -1,4 +1,4 @@
-import { Currency, Token, CurrencyAmount } from '@uniswap/sdk-core'
+import { Currency, Token, CurrencyAmount, Ether } from '@uniswap/sdk-core'
 import JSBI from 'jsbi'
 import { useMemo } from 'react'
 import { UNI } from '../../constants/tokens'
@@ -15,9 +15,9 @@ import { Erc20Interface } from 'abis/types/Erc20'
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
  */
-export function useETHBalances(
-  uncheckedAddresses?: (string | undefined)[]
-): { [address: string]: CurrencyAmount<Currency> | undefined } {
+export function useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
+  [address: string]: CurrencyAmount<Currency> | undefined
+} {
   const { chainId } = useActiveWeb3React()
   const multicallContract = useMulticall2Contract()
 
@@ -42,7 +42,9 @@ export function useETHBalances(
     () =>
       addresses.reduce<{ [address: string]: CurrencyAmount<Currency> }>((memo, address, i) => {
         const value = results?.[i]?.result?.[0]
-        if (value && chainId) memo[address] = CurrencyAmount.ether(chainId, JSBI.BigInt(value.toString()))
+        if (value && chainId)
+          memo[address] = CurrencyAmount.fromRawAmount(Ether.onChain(chainId), JSBI.BigInt(value.toString()))
+        return memo
         return memo
       }, {}),
     [addresses, chainId, results]
@@ -111,9 +113,10 @@ export function useCurrencyBalances(
   account?: string,
   currencies?: (Currency | undefined)[]
 ): (CurrencyAmount<Currency> | undefined)[] {
-  const tokens = useMemo(() => currencies?.filter((currency): currency is Token => currency?.isToken ?? false) ?? [], [
-    currencies,
-  ])
+  const tokens = useMemo(
+    () => currencies?.filter((currency): currency is Token => currency?.isToken ?? false) ?? [],
+    [currencies]
+  )
 
   const tokenBalances = useTokenBalances(account, tokens)
   const containsETH: boolean = useMemo(() => currencies?.some((currency) => currency?.isNative) ?? false, [currencies])

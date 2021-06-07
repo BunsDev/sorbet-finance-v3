@@ -22,13 +22,14 @@ const NETWORK_URLS: {
   [chainId: number]: string
 } = {
   [1]: `https://mainnet.infura.io/v3/${INFURA_KEY}`,
-  [4]: `https://rinkeby.infura.io/v3/${INFURA_KEY}`,
+  // [4]: `https://rinkeby.infura.io/v3/${INFURA_KEY}`,
   [3]: `https://ropsten.infura.io/v3/${INFURA_KEY}`,
-  [5]: `https://goerli.infura.io/v3/${INFURA_KEY}`,
-  [42]: `https://kovan.infura.io/v3/${INFURA_KEY}`,
+  // [5]: `https://goerli.infura.io/v3/${INFURA_KEY}`,
+  // [42]: `https://kovan.infura.io/v3/${INFURA_KEY}`,
+  [137]: 'https://rpc-mainnet.maticvigil.com',
 }
 
-const SUPPORTED_CHAIN_IDS = [1, 4, 3, 42, 5]
+const SUPPORTED_CHAIN_IDS = [1, 3, 137]
 
 export const network = new NetworkConnector({
   urls: NETWORK_URLS,
@@ -47,7 +48,7 @@ export const injected = new InjectedConnector({
 export const walletconnect = new WalletConnectConnector({
   supportedChainIds: SUPPORTED_CHAIN_IDS,
   infuraId: INFURA_KEY, // obviously a hack
-  bridge: WALLETCONNECT_BRIDGE_URL,
+  // bridge: WALLETCONNECT_BRIDGE_URL,
   qrcode: true,
   pollingInterval: 15000,
 })

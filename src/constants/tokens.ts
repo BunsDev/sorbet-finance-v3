@@ -22,3 +22,35 @@ export const UNI: { [chainId: number]: Token } = {
   [5]: new Token(5, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),
   [42]: new Token(42, UNI_ADDRESS[42], 18, 'UNI', 'Uniswap'),
 }
+
+export const USDC_MATIC = new Token(137, '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', 6, 'USDC', 'USD//C')
+export const DAI_MATIC = new Token(137, '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', 18, 'DAI', 'Dai Stablecoin')
+export const USDT_MATIC = new Token(137, '0x3813e82e6f7098b9583FC0F33a962D02018B6803', 6, 'USDT', 'Tether USD')
+export const WETH_MATIC = new Token(137, '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18, 'WETH', 'Wrapped ETH')
+export const QUICK_MATIC = new Token(137, '0x831753dd7087cac61ab5644b308642cc1c33dc13', 18, 'QUICK', 'Quickswap')
+export const WBTC_MATIC = new Token(137, '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6', 8, 'WBTC', 'Wrapped BTC')
+export const WMATIC_MATIC = new Token(137, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped MATIC')
+export const MATIC_BASES = [USDC_MATIC, DAI_MATIC, USDT_MATIC, WETH_MATIC, QUICK_MATIC, WBTC_MATIC, WMATIC_MATIC]
+
+export const getBaseTokenLogoURLByTokenSymbol = (symbol: string | undefined): string | undefined => {
+  switch (symbol) {
+    case 'USDC':
+      return 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png'
+    case 'DAI':
+      return 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png'
+    case 'USDT':
+      return 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png'
+    case 'ETH':
+    case 'WETH':
+      return 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png'
+    case 'QUICK':
+      return 'https://raw.githubusercontent.com/sameepsi/quickswap-interface/master/public/favicon.jpeg'
+    case 'WBTC':
+      return 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png'
+    case 'WMATIC':
+    case 'MATIC':
+      return 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png'
+    default:
+      return undefined
+  }
+}

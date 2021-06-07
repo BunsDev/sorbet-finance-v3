@@ -2,7 +2,14 @@ import { FACTORY_ADDRESS as V3_FACTORY_ADDRESS } from '@uniswap/v3-sdk'
 import { constructSameAddressMap } from '../utils/constructSameAddressMap'
 
 export const UNI_ADDRESS = constructSameAddressMap('0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984')
-export const MULTICALL2_ADDRESSES = constructSameAddressMap('0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696')
+export const MULTICALL2_ADDRESSES = {
+  [1]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
+  [5]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
+  [4]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
+  [3]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
+  [137]: '0x114C4042B11a2b16F58Fe1BFe847589a122F678a',
+}
+
 export const V2_ROUTER_ADDRESS = constructSameAddressMap('0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D')
 export const GOVERNANCE_ADDRESS = constructSameAddressMap('0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F')
 export const TIMELOCK_ADDRESS = constructSameAddressMap('0x1a9C8182C09F50C8318d769245beA52c32BE35BC')

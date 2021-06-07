@@ -1,33 +1,21 @@
 import useScrollPosition from '@react-hook/window-scroll'
-import React, { useState } from 'react'
+import React from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
 import { darken } from 'polished'
-import { useTranslation } from 'react-i18next'
 import { Moon, Sun } from 'react-feather'
 import styled from 'styled-components/macro'
-
-import Logo from '../../assets/svg/logo.svg'
-import LogoDark from '../../assets/svg/logo_white.svg'
 
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
-import { CardNoise } from '../earn/styled'
-import { TYPE, ExternalLink } from '../../theme'
+import { ExternalLink } from '../../theme'
 
 import { YellowCard } from '../Card'
 import Menu from '../Menu'
 
 import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
-import ClaimModal from '../claim/ClaimModal'
-import { useToggleSelfClaimModal, useShowClaimPopup } from '../../state/application/hooks'
-import { useUserHasAvailableClaim } from '../../state/claim/hooks'
-import { useUserHasSubmittedClaim } from '../../state/transactions/hooks'
-import { Dots } from '../swap/styleds'
-import Modal from '../Modal'
-import UniBalanceContent from './UniBalanceContent'
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -305,62 +293,40 @@ const NETWORK_LABELS: { [chainId: number]: string } = {
   [3]: 'Ropsten',
   [5]: 'Görli',
   [42]: 'Kovan',
+  [137]: 'Polygon (Matic)',
+  [250]: 'Fantom',
 }
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
-  const { t } = useTranslation()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   // const [isDark] = useDarkModeManager()
   const [darkMode, toggleDarkMode] = useDarkModeManager()
 
-  const toggleClaimModal = useToggleSelfClaimModal()
-
-  const availableClaim: boolean = useUserHasAvailableClaim(account)
-
-  const { claimTxn } = useUserHasSubmittedClaim(account ?? undefined)
-
-  const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
-  const showClaimPopup = useShowClaimPopup()
-
   const scrollY = useScrollPosition()
 
   return (
     <HeaderFrame showBackground={scrollY > 45}>
-      <ClaimModal />
-      <Modal isOpen={showUniBalanceModal} onDismiss={() => setShowUniBalanceModal(false)}>
-        <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
-      </Modal>
       <HeaderRow>
-        <Title href=".">
-          <UniIcon>
+        <StyledNavLink id={`sorbet-nav-link`} to={'/'}>
+          Sorbet 🍧
+        </StyledNavLink>
+        {/* <Title href=".">
+           <UniIcon>
             <img width={'24px'} src={darkMode ? LogoDark : Logo} alt="logo" />
           </UniIcon>
-        </Title>
+        </Title> */}
       </HeaderRow>
       <HeaderLinks>
-        <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
-          {t('swap')}
+        <StyledNavLink id={`limit-order-nav-link`} to={'/limit-order'}>
+          Limit Order
         </StyledNavLink>
-        <StyledNavLink
-          id={`pool-nav-link`}
-          to={'/pool'}
-          isActive={(match, { pathname }) =>
-            Boolean(match) ||
-            pathname.startsWith('/add') ||
-            pathname.startsWith('/remove') ||
-            pathname.startsWith('/increase') ||
-            pathname.startsWith('/find')
-          }
-        >
-          {t('pool')}
+        <StyledNavLink id={`stake-nav-link`} to={''}>
+          DCA
         </StyledNavLink>
-        <StyledNavLink id={`stake-nav-link`} to={'/vote'}>
-          Vote
-        </StyledNavLink>
-        <StyledExternalLink id={`stake-nav-link`} href={'https://info.uniswap.org'}>
-          Charts <span style={{ fontSize: '11px', textDecoration: 'none !important' }}>↗</span>
+        <StyledExternalLink id={`stake-nav-link`} href={''}>
+          Automated Pools (soon)
         </StyledExternalLink>
       </HeaderLinks>
       <HeaderControls>
@@ -370,20 +336,11 @@ export default function Header() {
               <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
             )}
           </HideSmall>
-          {availableClaim && !showClaimPopup && (
-            <UNIWrapper onClick={toggleClaimModal}>
-              <UNIAmount active={!!account && !availableClaim} style={{ pointerEvents: 'auto' }}>
-                <TYPE.white padding="0 2px">
-                  {claimTxn && !claimTxn?.receipt ? <Dots>Claiming UNI</Dots> : 'Claim UNI'}
-                </TYPE.white>
-              </UNIAmount>
-              <CardNoise />
-            </UNIWrapper>
-          )}
+
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                {userEthBalance?.toSignificant(4)} ETH
+                {userEthBalance?.toSignificant(4)} {chainId === 137 ? 'MATIC' : 'ETH'}
               </BalanceText>
             ) : null}
             <Web3Status />

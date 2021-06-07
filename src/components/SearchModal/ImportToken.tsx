@@ -11,7 +11,6 @@ import { ArrowLeft, AlertCircle } from 'react-feather'
 import { transparentize } from 'polished'
 import useTheme from 'hooks/useTheme'
 import { ButtonPrimary } from 'components/Button'
-import { SectionBreak } from 'components/swap/styleds'
 import { useAddUserToken } from 'state/user/hooks'
 import { useActiveWeb3React } from 'hooks/web3'
 import { ExternalLink } from '../../theme/components'
@@ -29,6 +28,12 @@ const WarningWrapper = styled(Card)<{ highWarning: boolean }>`
   background-color: ${({ theme, highWarning }) =>
     highWarning ? transparentize(0.8, theme.red1) : transparentize(0.8, theme.yellow2)};
   width: fit-content;
+`
+
+const SectionBreak = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.bg3};
 `
 
 const AddressText = styled(TYPE.blue)`

@@ -28,7 +28,10 @@ const store = configureStore({
     multicall,
     lists,
   },
-  middleware: [...getDefaultMiddleware({ thunk: false }), save({ states: PERSISTED_KEYS, debounce: 1000 })],
+  middleware: [
+    // ...getDefaultMiddleware({ thunk: false }),
+    save({ states: PERSISTED_KEYS, debounce: 1000 }),
+  ],
   preloadedState: load({ states: PERSISTED_KEYS }),
 })
 
