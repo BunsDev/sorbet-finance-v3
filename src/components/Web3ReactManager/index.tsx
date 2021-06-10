@@ -20,14 +20,22 @@ const Message = styled.h2`
 `
 
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
+  const [prevChainId, setPrevChainId] = useState<number>()
   const { t } = useTranslation()
-  const { active } = useWeb3React()
+  const { active, chainId } = useWeb3React()
   const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
 
   // try to eagerly connect to an injected provider, if it exists and has granted access already
   const triedEager = useEagerConnect()
 
   // after eagerly trying injected, if the network connect ever isn't active or in an error state, activate itd
+  useEffect(() => {
+    if (chainId) {
+      if (prevChainId && chainId !== prevChainId) window.location.reload()
+      setPrevChainId(chainId)
+    }
+  }, [chainId, prevChainId])
+
   useEffect(() => {
     if (triedEager && !networkActive && !networkError && !active) {
       activateNetwork(network)
