@@ -9,7 +9,7 @@ import styled from 'styled-components/macro'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
-// import { ExternalLink } from '../../theme'
+import SorbetLogo from '../../assets/images/sorbet-logo.png'
 
 import { YellowCard } from '../Card'
 import Menu from '../Menu'
@@ -177,26 +177,26 @@ const BalanceText = styled(Text)`
   `};
 `
 
-// const Title = styled.a`
-//   display: flex;
-//   align-items: center;
-//   pointer-events: auto;
-//   justify-self: flex-start;
-//   margin-right: 12px;
-//   ${({ theme }) => theme.mediaWidth.upToSmall`
-//     justify-self: center;
-//   `};
-//   :hover {
-//     cursor: pointer;
-//   }
-// `
+const Title = styled.a`
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+  justify-self: flex-start;
+  margin-right: 12px;
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    justify-self: center;
+  `};
+  :hover {
+    cursor: pointer;
+  }
+`
 
-// const UniIcon = styled.div`
-//   transition: transform 0.3s ease;
-//   :hover {
-//     transform: rotate(-5deg);
-//   }
-// `
+const SorbetIcon = styled.div`
+  transition: transform 0.3s ease;
+  :hover {
+    transform: rotate(-5deg);
+  }
+`
 
 const activeClassName = 'ACTIVE'
 
@@ -309,14 +309,14 @@ export default function Header() {
   return (
     <HeaderFrame showBackground={scrollY > 45}>
       <HeaderRow>
-        <StyledNavLink id={`sorbet-nav-link`} to={'/'}>
-          Sorbet 🍧
-        </StyledNavLink>
-        {/* <Title href=".">
-           <UniIcon>
-            <img width={'24px'} src={darkMode ? LogoDark : Logo} alt="logo" />
-          </UniIcon>
-        </Title> */}
+        {/* <StyledNavLink id={`sorbet-nav-link`} to={'/'}>
+          <img width={'194px'} src={SorbetLogo} alt="logo" />
+        </StyledNavLink> */}
+        <Title href=".">
+          <SorbetIcon>
+            <img width={'174px'} src={SorbetLogo} alt="logo" />
+          </SorbetIcon>
+        </Title>
       </HeaderRow>
       <HeaderLinks>
         <StyledNavLink id={`limit-order-nav-link`} to={'/limit-order'}>

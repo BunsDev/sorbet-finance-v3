@@ -16,7 +16,7 @@ export const PoweredByGelatoWrapper = styled.div<{
 }>`
   display: flex;
   left: 40px;
-  bottom: -18px;
+  bottom: -10px;
   align-items: center;
   justify-content: center;
   width: ${({ size }) => size ?? '20px'};
@@ -38,7 +38,7 @@ export default function PoweredByGelato() {
   const [isDarkMode] = useDarkModeManager()
   return (
     <ExternalLink href={'https://www.gelato.network/'}>
-      <PoweredByGelatoWrapper size={'150px'}>
+      <PoweredByGelatoWrapper size={'130px'}>
         <img
           src={isDarkMode ? PoweredByGelatoWhiteTransparentIcon : PoweredByGelatoBlackTransparentIcon}
           alt={'powered by gelato'}
