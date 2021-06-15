@@ -7,6 +7,7 @@ import PoweredByGelatoBlackTransparentIcon from '../../assets/svg/poweredbygelat
 import PoweredByGelatoWhiteTransparentIcon from '../../assets/svg/poweredbygelato_whitetransparent.svg'
 import { ExternalLink } from '../../theme'
 import { useDarkModeManager } from 'state/user/hooks'
+import { isMobile } from 'react-device-detect'
 
 export const PoweredByGelatoWrapper = styled.div<{
   stroke?: string
@@ -36,7 +37,7 @@ export const PoweredByGelatoWrapper = styled.div<{
 
 export default function PoweredByGelato() {
   const [isDarkMode] = useDarkModeManager()
-  return (
+  return isMobile ? null : (
     <ExternalLink href={'https://www.gelato.network/'}>
       <PoweredByGelatoWrapper size={'130px'}>
         <img

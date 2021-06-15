@@ -26,7 +26,7 @@ const NETWORK_URLS: {
   [3]: `https://ropsten.infura.io/v3/${INFURA_KEY}`,
   // [5]: `https://goerli.infura.io/v3/${INFURA_KEY}`,
   // [42]: `https://kovan.infura.io/v3/${INFURA_KEY}`,
-  [137]: 'https://rpc-mainnet.maticvigil.com',
+  [137]: 'https://rpc-mainnet.matic.network',
 }
 
 const SUPPORTED_CHAIN_IDS = [1, 3, 137]
@@ -48,7 +48,7 @@ export const injected = new InjectedConnector({
 export const walletconnect = new WalletConnectConnector({
   supportedChainIds: SUPPORTED_CHAIN_IDS,
   infuraId: INFURA_KEY, // obviously a hack
-  // bridge: WALLETCONNECT_BRIDGE_URL,
+  bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: 15000,
 })

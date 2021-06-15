@@ -2236,13 +2236,14 @@
     graphql "15.5.0"
     graphql-request "3.4.0"
 
-"@gelatonetwork/limit-orders-react@0.0.1-10":
-  version "0.0.1-10"
-  resolved "https://registry.yarnpkg.com/@gelatonetwork/limit-orders-react/-/limit-orders-react-0.0.1-10.tgz#a07db0615df0f7220519af996a171e8c2cbc2c4b"
-  integrity sha512-3WZLhcl55xLYyoa3eJ6ZQmHGqNd53hnGrWQ/+f1i7bVWmk1+uU2DFMYXKpHE6ZvoLV2msYeE0A/ZLqLnskAxMg==
+"@gelatonetwork/limit-orders-react@0.0.1-11":
+  version "0.0.1-11"
+  resolved "https://registry.yarnpkg.com/@gelatonetwork/limit-orders-react/-/limit-orders-react-0.0.1-11.tgz#f32dc2255f0299e140841177c3b2e09792924687"
+  integrity sha512-dMFhwpyQAFIfJCzL8Opom4yE8ln0HO8zaBLdUwR/+dhmKos/AbJx7BwPnuiZs13HgGYVkGhF6qapYh1fC8gXmQ==
   dependencies:
     "@gelatonetwork/limit-orders-lib" "^1.0.0-5"
     ethers "5.0.7"
+    local-storage "^2.0.0"
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -13241,6 +13242,11 @@ loader-utils@^1.1.0, loader-utils@^1.2.3, loader-utils@^1.4.0:
     big.js "^5.2.2"
     emojis-list "^3.0.0"
     json5 "^1.0.1"
+
+local-storage@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/local-storage/-/local-storage-2.0.0.tgz#748b7d041b197f46f3ec7393640851c175b64db8"
+  integrity sha512-/0sRoeijw7yr/igbVVygDuq6dlYCmtsuTmmpnweVlVtl/s10pf5BCq8LWBxW/AMyFJ3MhMUuggMZiYlx6qr9tw==
 
 locate-path@^2.0.0:
   version "2.0.0"

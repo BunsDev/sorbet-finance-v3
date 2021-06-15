@@ -10,7 +10,8 @@ import { useActiveWeb3React } from '../../hooks/web3'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
 import SorbetLogo from '../../assets/images/sorbet-logo.png'
-
+import SorbetLogoOnly from '../../assets/images/sorbet_logo_no_text.png'
+import { isMobile } from 'react-device-detect'
 import { YellowCard } from '../Card'
 import Menu from '../Menu'
 
@@ -309,24 +310,29 @@ export default function Header() {
   return (
     <HeaderFrame showBackground={scrollY > 45}>
       <HeaderRow>
-        {/* <StyledNavLink id={`sorbet-nav-link`} to={'/'}>
-          <img width={'194px'} src={SorbetLogo} alt="logo" />
-        </StyledNavLink> */}
-        <Title href=".">
-          <SorbetIcon>
-            <img width={'174px'} src={SorbetLogo} alt="logo" />
-          </SorbetIcon>
-        </Title>
+        {isMobile ? (
+          <Title href=".">
+            <SorbetIcon>
+              <img width={'46px'} src={SorbetLogoOnly} alt="logo" />
+            </SorbetIcon>
+          </Title>
+        ) : (
+          <Title href=".">
+            <SorbetIcon>
+              <img width={'174px'} src={SorbetLogo} alt="logo" />
+            </SorbetIcon>
+          </Title>
+        )}
       </HeaderRow>
       <HeaderLinks>
         <StyledNavLink id={`limit-order-nav-link`} to={'/limit-order'}>
-          Limit Order
+          Orders
         </StyledNavLink>
-        <StyledNavLink id={`stake-nav-link`} to={'/dca'}>
+        <StyledNavLink id={`dca-nav-link`} to={'/dca'}>
           DCA (soon)
         </StyledNavLink>
-        <StyledNavLink id={`stake-nav-link`} to={'/pools'}>
-          Automated Pools (soon)
+        <StyledNavLink id={`pools-nav-link`} to={'/pools'}>
+          Pools (soon)
         </StyledNavLink>
       </HeaderLinks>
       <HeaderControls>
