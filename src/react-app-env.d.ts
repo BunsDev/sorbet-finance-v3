@@ -4,6 +4,11 @@ declare module 'jazzicon' {
   export default function (diameter: number, seed: number): HTMLElement
 }
 
+declare module '*.svg' {
+  const value: any
+  export = value
+}
+
 declare module 'fortmatic'
 
 interface Window {

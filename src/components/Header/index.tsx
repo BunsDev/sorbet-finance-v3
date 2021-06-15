@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom'
 import { darken } from 'polished'
 import { Moon, Sun } from 'react-feather'
 import styled from 'styled-components/macro'
-
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
@@ -14,7 +13,6 @@ import SorbetLogoOnly from '../../assets/images/sorbet_logo_no_text.png'
 import { isMobile } from 'react-device-detect'
 import { YellowCard } from '../Card'
 import Menu from '../Menu'
-
 import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 
@@ -194,9 +192,9 @@ const Title = styled.a`
 
 const SorbetIcon = styled.div`
   transition: transform 0.3s ease;
-  :hover {
-    transform: rotate(-5deg);
-  }
+  // :hover {
+  //   transform: rotate(-5deg);
+  // }
 `
 
 const activeClassName = 'ACTIVE'
@@ -326,7 +324,7 @@ export default function Header() {
       </HeaderRow>
       <HeaderLinks>
         <StyledNavLink id={`limit-order-nav-link`} to={'/limit-order'}>
-          Orders
+          Limit Orders
         </StyledNavLink>
         <StyledNavLink id={`dca-nav-link`} to={'/dca'}>
           DCA (soon)

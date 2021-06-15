@@ -1,15 +1,12 @@
 import React, { useRef } from 'react'
-import { BookOpen, Code, Info, MessageCircle, PieChart } from 'react-feather'
+import { Code, Info, MessageCircle } from 'react-feather'
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
-import { useActiveWeb3React } from '../../hooks/web3'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../state/application/hooks'
-
 import { ExternalLink } from '../../theme'
-import { ButtonPrimary } from '../Button'
 
 export enum FlyoutAlignment {
   LEFT = 'LEFT',
@@ -45,12 +42,6 @@ const StyledMenuButton = styled.button`
   svg {
     margin-top: 2px;
   }
-`
-
-const UNIbutton = styled(ButtonPrimary)`
-  background-color: ${({ theme }) => theme.bg3};
-  background: radial-gradient(174.47% 188.91% at 1.84% 0%, #ff007a 0%, #2172e5 100%), #edeef2;
-  border: none;
 `
 
 const StyledMenu = styled.div`
@@ -120,16 +111,13 @@ const InternalMenuItem = styled(Link)`
   }
 `
 
-const CODE_LINK = 'https://github.com/Uniswap/uniswap-interface'
+const CODE_LINK = 'https://github.com/gelatonetwork/sorbet-finance'
 
 export default function Menu() {
-  const { account } = useActiveWeb3React()
-
   const node = useRef<HTMLDivElement>()
   const open = useModalOpen(ApplicationModal.MENU)
   const toggle = useToggleModal(ApplicationModal.MENU)
   useOnClickOutside(node, open ? toggle : undefined)
-  const openClaimModal = useToggleModal(ApplicationModal.ADDRESS_CLAIM)
 
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451
@@ -140,31 +128,22 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem href="https://uniswap.org/">
+          <MenuItem href="https://www.gelato.network/">
             <Info size={14} />
             <div>About</div>
-          </MenuItem>
-          <MenuItem href="https://docs.uniswap.org/">
-            <BookOpen size={14} />
-            <div>Docs</div>
           </MenuItem>
           <MenuItem href={CODE_LINK}>
             <Code size={14} />
             <div>Code</div>
           </MenuItem>
-          <MenuItem href="https://discord.gg/FCfyBSbCU5">
+          <MenuItem href="https://discord.gg/ApbA39BKyJ">
             <MessageCircle size={14} />
             <div>Discord</div>
           </MenuItem>
-          <MenuItem href="https://info.uniswap.org/">
-            <PieChart size={14} />
-            <div>Analytics</div>
+          <MenuItem href="https://t.me/therealgelatonetwork">
+            <MessageCircle size={14} />
+            <div>Telegram</div>
           </MenuItem>
-          {account && (
-            <UNIbutton onClick={openClaimModal} padding="8px 16px" width="100%" borderRadius="12px" mt="0.5rem">
-              Claim UNI
-            </UNIbutton>
-          )}
         </MenuFlyout>
       )}
     </StyledMenu>

@@ -7,7 +7,7 @@ import Polling from '../components/Header/Polling'
 import Popups from '../components/Popups'
 import Web3ReactManager from '../components/Web3ReactManager'
 import ErrorBoundary from '../components/ErrorBoundary'
-import PoweredByGelato from '../components/PoweredByGelato'
+// import PoweredByGelato from '../components/PoweredByGelato'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import LimitOrder from './LimitOrder'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './LimitOrder/redirects'
@@ -63,7 +63,7 @@ export default function App() {
             <ThemedBackground />
             <Popups />
             <Polling />
-            <PoweredByGelato />
+            {/* <PoweredByGelato /> */}
             <Web3ReactManager>
               <Switch>
                 <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
