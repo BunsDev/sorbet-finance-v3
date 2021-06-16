@@ -2227,10 +2227,10 @@
     graphql "15.5.0"
     graphql-request "3.4.0"
 
-"@gelatonetwork/limit-orders-react@0.0.1-15":
-  version "0.0.1-15"
-  resolved "https://registry.yarnpkg.com/@gelatonetwork/limit-orders-react/-/limit-orders-react-0.0.1-15.tgz#515e2c9d47f7eb812c7c97eb794bbc43acde7bda"
-  integrity sha512-EWeiirWdeeQ8FbhHg0irGSGD7lWJhlPhy04URME6yEwhbsWuR6CZLRLwkWt9LgSdkw8qYPOXSzNjDsROO8WM7Q==
+"@gelatonetwork/limit-orders-react@0.0.1-16":
+  version "0.0.1-16"
+  resolved "https://registry.yarnpkg.com/@gelatonetwork/limit-orders-react/-/limit-orders-react-0.0.1-16.tgz#a6b0bb44e2854d5388693d6904d36a182575a71d"
+  integrity sha512-trqycQVUMNRqsXl4rf2Obsi68QJFElRcnsatMlwGhb7tR1u9jGac7JAZUnZ4DtnS/RUghXfz+Arz/1/Nc77Bsw==
   dependencies:
     "@gelatonetwork/limit-orders-lib" "^1.0.0-7"
     ethers "5.0.7"
