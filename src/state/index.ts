@@ -6,9 +6,9 @@ import user from './user/reducer'
 import transactions from './transactions/reducer'
 import lists from './lists/reducer'
 import multicall from './multicall/reducer'
-import { gelatoReducers } from '@gelatonetwork/limit-orders-react'
+import { gelatoReducers, GELATO_PERSISTED_KEYS } from '@gelatonetwork/limit-orders-react'
 
-const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists']
+const PERSISTED_KEYS: string[] = ['user', ...GELATO_PERSISTED_KEYS]
 
 const store = configureStore({
   reducer: {
