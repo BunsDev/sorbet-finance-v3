@@ -21,6 +21,7 @@ import Identicon from '../Identicon'
 import { ButtonSecondary } from '../Button'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
+// import { clearAllTransactions as clearAllTransactionsLib } from '@gelatonetwork/limit-orders-react'
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -285,7 +286,10 @@ export default function AccountDetails({
   }
 
   const clearAllTransactionsCallback = useCallback(() => {
-    if (chainId) dispatch(clearAllTransactions({ chainId }))
+    if (chainId) {
+      dispatch(clearAllTransactions({ chainId }))
+      // dispatch(clearAllTransactionsLib({ chainId }))
+    }
   }, [dispatch, chainId])
 
   return (

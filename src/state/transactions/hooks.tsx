@@ -42,9 +42,14 @@ export function useAllTransactions(): { [txHash: string]: TransactionDetails } {
   const { chainId } = useActiveWeb3React()
 
   const state1 = useSelector<AppState, AppState['transactions']>((state) => state.transactions)
-  const state2 = useSelector<AppState, AppState['gtransactions']>((state) => state.gtransactions)
+  //const state2 = useSelector<AppState, AppState['gtransactions']>((state) => state.gtransactions)
 
-  return chainId ? { ...state1[chainId], ...state2[chainId] } ?? {} : {}
+  return chainId
+    ? {
+        ...state1[chainId],
+        // , ...state2[chainId]
+      } ?? {}
+    : {}
 }
 
 export function useIsTransactionPending(transactionHash?: string): boolean {
