@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 import ReactGA from 'react-ga'
 import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
-import Blocklist from './components/Blocklist'
+// import Blocklist from './components/Blocklist'
 import { NetworkContextName } from './constants/misc'
 import './i18n'
 import App from './pages/App'
@@ -71,19 +71,19 @@ ReactDOM.render(
     <FixedGlobalStyle />
     <Web3ReactProvider getLibrary={getLibrary}>
       <Web3ProviderNetwork getLibrary={getLibrary}>
-        <Blocklist>
-          <Provider store={store}>
-            <ThemeProvider>
-              <Gelato>
-                <Updaters />
-                <ThemedGlobalStyle />
-                <HashRouter>
-                  <App />
-                </HashRouter>
-              </Gelato>
-            </ThemeProvider>
-          </Provider>
-        </Blocklist>
+        {/* <Blocklist> */}
+        <Provider store={store}>
+          <ThemeProvider>
+            <Gelato>
+              <Updaters />
+              <ThemedGlobalStyle />
+              <HashRouter>
+                <App />
+              </HashRouter>
+            </Gelato>
+          </ThemeProvider>
+        </Provider>
+        {/* </Blocklist> */}
       </Web3ProviderNetwork>
     </Web3ReactProvider>
   </StrictMode>,
