@@ -12,11 +12,11 @@ import './i18n'
 import App from './pages/App'
 import store from './state'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
-import ApplicationUpdater from './state/application/updater'
-import ListsUpdater from './state/lists/updater'
-import MulticallUpdater from './state/multicall/updater'
-import TransactionUpdater from './state/transactions/updater'
-import UserUpdater from './state/user/updater'
+// import ApplicationUpdater from './state/application/updater'
+// import ListsUpdater from './state/lists/updater'
+// import MulticallUpdater from './state/multicall/updater'
+// import TransactionUpdater from './state/transactions/updater'
+// import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
 import { GelatoProvider } from '@gelatonetwork/limit-orders-react'
@@ -48,17 +48,17 @@ if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   ReactGA.initialize('test', { testMode: true, debug: true })
 }
 
-function Updaters() {
-  return (
-    <>
-      <ListsUpdater />
-      <UserUpdater />
-      <ApplicationUpdater />
-      <TransactionUpdater />
-      <MulticallUpdater />
-    </>
-  )
-}
+// function Updaters() {
+//   return (
+//     <>
+//       <ListsUpdater />
+//       <UserUpdater />
+//       <ApplicationUpdater />
+//       <TransactionUpdater />
+//       <MulticallUpdater />
+//     </>
+//   )
+// }
 
 function Gelato({ children }: { children?: React.ReactNode }) {
   const { library, chainId, account } = useActiveWeb3React()
@@ -78,7 +78,7 @@ ReactDOM.render(
           <Provider store={store}>
             <ThemeProvider>
               <Gelato>
-                <Updaters />
+                {/* <Updaters /> */}
                 <ThemedGlobalStyle />
                 <HashRouter>
                   <App />

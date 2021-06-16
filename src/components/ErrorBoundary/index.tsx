@@ -116,21 +116,21 @@ export default class ErrorBoundary extends React.Component<unknown, ErrorBoundar
 }
 
 function getRelevantState(): null | keyof AppState {
-  const path = window.location.hash
-  if (!path.startsWith('#/')) {
-    return null
-  }
-  const pieces = path.substring(2).split(/[\/\\?]/)
-  switch (pieces[0]) {
-    case 'swap':
-      return 'swap'
-    case 'add':
-      if (pieces[1] === 'v2') return 'mint'
-      else return 'mintV3'
-    case 'remove':
-      if (pieces[1] === 'v2') return 'burn'
-      else return 'burnV3'
-  }
+  // const path = window.location.hash
+  // if (!path.startsWith('#/')) {
+  //   return null
+  // }
+  // const pieces = path.substring(2).split(/[\/\\?]/)
+  // switch (pieces[0]) {
+  //   case 'swap':
+  //     return 'swap'
+  //   case 'add':
+  //     if (pieces[1] === 'v2') return 'mint'
+  //     else return 'mintV3'
+  //   case 'remove':
+  //     if (pieces[1] === 'v2') return 'burn'
+  //     else return 'burnV3'
+  // }
   return null
 }
 

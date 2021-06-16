@@ -2,15 +2,9 @@ import { configureStore } from '@reduxjs/toolkit'
 import { save, load } from 'redux-localstorage-simple'
 
 import application from './application/reducer'
-import { updateVersion } from './global/actions'
 import user from './user/reducer'
 import transactions from './transactions/reducer'
-import swap from './swap/reducer'
-import mint from './mint/reducer'
-import mintV3 from './mint/v3/reducer'
 import lists from './lists/reducer'
-import burn from './burn/reducer'
-import burnV3 from './burn/v3/reducer'
 import multicall from './multicall/reducer'
 import { gelatoReducers } from '@gelatonetwork/limit-orders-react'
 
@@ -21,11 +15,6 @@ const store = configureStore({
     application,
     user,
     transactions,
-    swap,
-    mint,
-    mintV3,
-    burn,
-    burnV3,
     multicall,
     lists,
     ...gelatoReducers,
@@ -36,8 +25,6 @@ const store = configureStore({
   ],
   preloadedState: load({ states: PERSISTED_KEYS }),
 })
-
-store.dispatch(updateVersion())
 
 export default store
 
