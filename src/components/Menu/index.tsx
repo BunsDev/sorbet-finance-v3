@@ -111,7 +111,7 @@ const InternalMenuItem = styled(Link)`
   }
 `
 
-const CODE_LINK = 'https://github.com/gelatodigital/sorbet-finance'
+const CODE_LINK = 'https://github.com/gelatodigital/sorbet-finance-v3'
 
 export default function Menu() {
   const node = useRef<HTMLDivElement>()

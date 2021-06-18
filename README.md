@@ -7,11 +7,9 @@ Interface for Sorbet Finance.
 
 - Website: [sorbet.finance](https://sorbet.finance/)
 
-## Accessing the Uniswap Interface
+## Accessing the Sorbet Finance Interface
 
-To access the Uniswap Interface, use an IPFS gateway link from the
-[latest release](https://github.com/Uniswap/uniswap-interface/releases/latest),
-or visit [app.uniswap.org](https://app.uniswap.org).
+To access the Uniswap Interface visit [sorbet.finance](https://sorbet.finance/).
 
 ## Development
 
@@ -27,11 +25,11 @@ yarn install
 yarn start
 ```
 
+To use Gelato Limit Orders on your app please refer to our [libraries](https://github.com/gelatodigital/limit-orders-lib) repository.
+
 ## Contributions
 
 **Please open all pull requests against the `main` branch.**
 CI checks will run against all PRs.
-
-## Accessing Uniswap V1
 
 Repo forked and modified from [Uniswap](https://github.com/Uniswap/uniswap-interface).
