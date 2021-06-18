@@ -72,11 +72,16 @@ function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): C
     const callKeys: string[] = JSON.parse(serializedCallKeys)
     if (!chainId || callKeys.length === 0) return undefined
     const calls = callKeys.map((key) => parseCallKey(key))
+
+    const listenerOptions = options ?? {
+      blocksPerFetch: chainId === 1 || chainId === 3 ? 1 : 15,
+    }
+
     dispatch(
       addMulticallListeners({
         chainId,
         calls,
-        options,
+        options: listenerOptions,
       })
     )
 
@@ -85,7 +90,7 @@ function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): C
         removeMulticallListeners({
           chainId,
           calls,
-          options,
+          options: listenerOptions,
         })
       )
     }

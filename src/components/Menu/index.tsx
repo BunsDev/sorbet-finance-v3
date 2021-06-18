@@ -111,7 +111,7 @@ const InternalMenuItem = styled(Link)`
   }
 `
 
-const CODE_LINK = 'https://github.com/gelatonetwork/sorbet-finance'
+const CODE_LINK = 'https://github.com/gelatodigital/sorbet-finance'
 
 export default function Menu() {
   const node = useRef<HTMLDivElement>()
@@ -128,7 +128,7 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem href="https://www.gelato.network/">
+          <MenuItem href="https://gelato-1.gitbook.io/sorbet-finance/">
             <Info size={14} />
             <div>About</div>
           </MenuItem>

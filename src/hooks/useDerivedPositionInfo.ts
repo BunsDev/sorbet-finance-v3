@@ -1,7 +1,23 @@
 import { Pool, Position } from '@uniswap/v3-sdk'
+import { BigNumber } from 'ethers'
 import { usePool } from 'hooks/usePools'
-import { PositionDetails } from 'types/position'
 import { useCurrency } from './Tokens'
+
+export interface PositionDetails {
+  nonce: BigNumber
+  tokenId: BigNumber
+  operator: string
+  token0: string
+  token1: string
+  fee: number
+  tickLower: number
+  tickUpper: number
+  liquidity: BigNumber
+  feeGrowthInside0LastX128: BigNumber
+  feeGrowthInside1LastX128: BigNumber
+  tokensOwed0: BigNumber
+  tokensOwed1: BigNumber
+}
 
 export function useDerivedPositionInfo(positionDetails: PositionDetails | undefined): {
   position: Position | undefined
