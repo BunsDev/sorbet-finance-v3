@@ -11,6 +11,7 @@ import './i18n'
 import App from './pages/App'
 import store from './state'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
 import { GelatoProvider } from '@gelatonetwork/limit-orders-react'
@@ -42,6 +43,14 @@ if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   ReactGA.initialize('test', { testMode: true, debug: true })
 }
 
+function Updaters() {
+  return (
+    <>
+      <UserUpdater />
+    </>
+  )
+}
+
 function Gelato({ children }: { children?: React.ReactNode }) {
   const { library, chainId, account } = useActiveWeb3React()
   return (
@@ -58,6 +67,7 @@ ReactDOM.render(
       <Web3ProviderNetwork getLibrary={getLibrary}>
         <Provider store={store}>
           <ThemeProvider>
+            <Updaters />
             <ThemedGlobalStyle />
             <HashRouter>
               <Gelato>
