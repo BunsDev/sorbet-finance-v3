@@ -11,23 +11,22 @@ export interface SerializableTransactionReceipt {
   status?: number
 }
 
-export const addTransaction =
-  createAction<{
-    chainId: number
-    hash: string
-    from: string
-    approval?: { tokenAddress: string; spender: string }
-    claim?: { recipient: string }
-    summary?: string
-  }>('transactions/addTransaction')
-export const clearAllTransactions = createAction<{ chainId: number }>('transactions/clearAllTransactions')
+export const addTransaction = createAction<{
+  chainId: number
+  hash: string
+  from: string
+  approval?: { tokenAddress: string; spender: string }
+  claim?: { recipient: string }
+  summary?: string
+}>('gtransactions/addTransaction')
+export const clearAllTransactions = createAction<{ chainId: number }>('gtransactions/clearAllTransactions')
 export const finalizeTransaction = createAction<{
   chainId: number
   hash: string
   receipt: SerializableTransactionReceipt
-}>('transactions/finalizeTransaction')
+}>('gtransactions/finalizeTransaction')
 export const checkedTransaction = createAction<{
   chainId: number
   hash: string
   blockNumber: number
-}>('transactions/checkedTransaction')
+}>('gtransactions/checkedTransaction')

@@ -6,17 +6,11 @@ import ReactDOM from 'react-dom'
 import ReactGA from 'react-ga'
 import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
-// import Blocklist from './components/Blocklist'
 import { NetworkContextName } from './constants/misc'
 import './i18n'
 import App from './pages/App'
 import store from './state'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
-import ApplicationUpdater from './state/application/updater'
-import MulticallUpdater from './state/multicall/updater'
-// import ListsUpdater from './state/lists/updater'
-// import TransactionUpdater from './state/transactions/updater'
-// import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
 import { GelatoProvider } from '@gelatonetwork/limit-orders-react'
@@ -48,15 +42,6 @@ if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   ReactGA.initialize('test', { testMode: true, debug: true })
 }
 
-function Updaters() {
-  return (
-    <>
-      <ApplicationUpdater />
-      <MulticallUpdater />
-    </>
-  )
-}
-
 function Gelato({ children }: { children?: React.ReactNode }) {
   const { library, chainId, account } = useActiveWeb3React()
   return (
@@ -71,19 +56,16 @@ ReactDOM.render(
     <FixedGlobalStyle />
     <Web3ReactProvider getLibrary={getLibrary}>
       <Web3ProviderNetwork getLibrary={getLibrary}>
-        {/* <Blocklist> */}
         <Provider store={store}>
           <ThemeProvider>
-            <Gelato>
-              <Updaters />
-              <ThemedGlobalStyle />
-              <HashRouter>
+            <ThemedGlobalStyle />
+            <HashRouter>
+              <Gelato>
                 <App />
-              </HashRouter>
-            </Gelato>
+              </Gelato>
+            </HashRouter>
           </ThemeProvider>
         </Provider>
-        {/* </Blocklist> */}
       </Web3ProviderNetwork>
     </Web3ReactProvider>
   </StrictMode>,

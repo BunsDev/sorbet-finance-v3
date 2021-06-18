@@ -1,22 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { save, load } from 'redux-localstorage-simple'
-
-import application from './application/reducer'
 import user from './user/reducer'
-import transactions from './transactions/reducer'
-import lists from './lists/reducer'
-import multicall from './multicall/reducer'
+import application from './application/reducer'
 import { gelatoReducers, GELATO_PERSISTED_KEYS } from '@gelatonetwork/limit-orders-react'
 
 const PERSISTED_KEYS: string[] = ['user', ...GELATO_PERSISTED_KEYS]
 
 const store = configureStore({
   reducer: {
-    application,
     user,
-    transactions,
-    multicall,
-    lists,
+    application,
     ...gelatoReducers,
   },
   middleware: [

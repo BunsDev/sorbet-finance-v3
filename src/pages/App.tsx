@@ -12,7 +12,6 @@ import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import LimitOrder from './LimitOrder'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './LimitOrder/redirects'
 import { ThemedBackground } from '../theme'
-import ApeModeQueryParamReader from 'hooks/useApeModeQueryParamReader'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -54,7 +53,6 @@ export default function App() {
       <Suspense fallback={null}>
         <Route component={GoogleAnalyticsReporter} />
         <Route component={DarkModeQueryParamReader} />
-        <Route component={ApeModeQueryParamReader} />
         <AppWrapper>
           <HeaderWrapper>
             <Header />
