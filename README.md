@@ -1,7 +1,7 @@
-# Uniswap Interface
+# Sorbet Finance Interface
 
-[![Unit Tests](https://github.com/Uniswap/uniswap-interface/actions/workflows/unit-tests.yaml/badge.svg)](https://github.com/Uniswap/uniswap-interface/actions/workflows/unit-tests.yaml)
-[![Lint](https://github.com/Uniswap/uniswap-interface/actions/workflows/lint.yml/badge.svg)](https://github.com/Uniswap/uniswap-interface/actions/workflows/lint.yml)
+[![Unit Tests](https://github.com/gelatodigital/sorbet-finance-v3/actions/workflows/unit-tests.yaml/badge.svg)](https://github.com/gelatodigital/sorbet-finance-v3/actions/workflows/unit-tests.yaml)
+[![Lint](https://github.com/gelatodigital/sorbet-finance-v3/actions/workflows/lint.yml/badge.svg)](https://github.com/gelatodigital/sorbet-finance-v3/actions/workflows/lint.yml)
 
 Interface for Sorbet Finance.
 
