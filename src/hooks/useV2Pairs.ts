@@ -4,7 +4,6 @@ import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.
 import { Interface } from '@ethersproject/abi'
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
 import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
-import { Pair as QuickswapPair } from 'quickswap-sdk'
 
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
 
@@ -16,11 +15,7 @@ export enum PairState {
 }
 
 const getPairAddress = (tokenA: Token, tokenB: Token): string | undefined => {
-  if (tokenA.chainId === 137 && tokenB.chainId === 137) {
-    return QuickswapPair.getAddress(tokenA as any, tokenB as any)
-  } else if (tokenA.chainId !== 137 && tokenB.chainId !== 137) {
-    return Pair.getAddress(tokenA, tokenB)
-  } else return undefined
+  return Pair.getAddress(tokenA, tokenB)
 }
 
 export function useV2Pairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {

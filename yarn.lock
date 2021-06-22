@@ -2051,21 +2051,21 @@
     "@ethersproject/properties" "^5.3.0"
     "@ethersproject/strings" "^5.3.0"
 
-"@gelatonetwork/limit-orders-lib@^1.0.0-13":
-  version "1.0.0-13"
-  resolved "https://registry.yarnpkg.com/@gelatonetwork/limit-orders-lib/-/limit-orders-lib-1.0.0-13.tgz#7305b5f81604fad8bdf745f43ed2f5f4b756ac6a"
-  integrity sha512-Wy9CIoeuqrNwKfBJugC2lA8IZ0CU09kKKyq+F6G9ecZZ70xCmCkoWa7gqxBnw+hRWCF491QR8FgcxK4YY7mrNQ==
+"@gelatonetwork/limit-orders-lib@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@gelatonetwork/limit-orders-lib/-/limit-orders-lib-1.0.1.tgz#53ecd0d1fca0c24d7b52dbf62f83d090d35ab1bb"
+  integrity sha512-DPKCj01czO+2vTGA7dbYD4if6S4ftwi6ZoCx2rPF5OWe/Q9AKjn+O9075lw6mw6We5m8X07zrbVRbj6J7MbyhQ==
   dependencies:
     ethers "5.2.0"
     graphql "15.5.0"
     graphql-request "3.4.0"
 
-"@gelatonetwork/limit-orders-react@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@gelatonetwork/limit-orders-react/-/limit-orders-react-0.0.6.tgz#3bb3ddc528ca205027a9fa91e7b20d2643515d8d"
-  integrity sha512-dJtt4SAIoRAsvMzbGfy6P58H8qcwUJ0CQCU+AjVxAMo8hhEVmzkZfcjBM1ELE8vpH/sJ765J/P5+QLfQTCX8KA==
+"@gelatonetwork/limit-orders-react@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@gelatonetwork/limit-orders-react/-/limit-orders-react-0.0.8.tgz#bcc6c67816a277276dfab75046935a8eac4120f8"
+  integrity sha512-0wXKP94Ci+HJUnStimrcpe6/TXbSa2C5EoPWciyxw5msaYCnQbz01OS2AoV91yZC5KoC/tEH+hGQewqrCk4QVA==
   dependencies:
-    "@gelatonetwork/limit-orders-lib" "^1.0.0-13"
+    "@gelatonetwork/limit-orders-lib" "^1.0.1"
     "@popperjs/core" "^2.9.2"
     "@reach/dialog" "^0.15.0"
     "@uniswap/default-token-list" "^2.0.0"
@@ -3501,7 +3501,7 @@
   resolved "https://registry.yarnpkg.com/@uniswap/v2-core/-/v2-core-1.0.0.tgz#e0fab91a7d53e8cafb5326ae4ca18351116b0844"
   integrity sha512-BJiXrBGnN8mti7saW49MXwxDBRFiWemGetE58q8zgfnPPzQKq55ADltEILqOt6VFZ22kVeVKbF8gVd8aY3l7pA==
 
-"@uniswap/v2-core@1.0.1", "@uniswap/v2-core@^1.0.0":
+"@uniswap/v2-core@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@uniswap/v2-core/-/v2-core-1.0.1.tgz#af8f508bf183204779938969e2e54043e147d425"
   integrity sha512-MtybtkUPSyysqLY2U210NBDeCHX+ltHt3oADGdjqoThZaFRDKwM6k1Nb3F0A3hk5hwuQvytFWhrWHOEq6nVJ8Q==
@@ -10455,7 +10455,7 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-jsbi@^3.1.1, jsbi@^3.1.4:
+jsbi@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/jsbi/-/jsbi-3.1.4.tgz#9654dd02207a66a4911b4e4bb74265bc2cbc9dd0"
   integrity sha512-52QRRFSsi9impURE8ZUbzAMCLjPm4THO7H2fcuIvaaeFTbSysvkodbQQXIVsNgq/ypDbq6dJiuGKL0vZ/i9hUg==
@@ -13330,19 +13330,6 @@ queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
-
-quickswap-sdk@^3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/quickswap-sdk/-/quickswap-sdk-3.0.8.tgz#7fada995bb4e054212a0920de1f29977d617c997"
-  integrity sha512-1pMOS5/RC4K++RCrt3hrhSHDzzVzy40CiLgM8UbvdSVUuYMN5jZZVocbkG+5fRlJA1JqhKhs2OYYLh08t50KOw==
-  dependencies:
-    "@uniswap/v2-core" "^1.0.0"
-    big.js "^5.2.2"
-    decimal.js-light "^2.5.0"
-    jsbi "^3.1.1"
-    tiny-invariant "^1.1.0"
-    tiny-warning "^1.0.3"
-    toformat "^2.0.0"
 
 raf@^3.4.1:
   version "3.4.1"
