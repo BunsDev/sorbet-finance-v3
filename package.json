@@ -1,6 +1,6 @@
 {
-  "name": "@sorbet-finance/interface",
-  "description": "Sorbet Interface",
+  "name": "soulswap-limit-interface",
+  "description": "SoulSwap Limit Interface",
   "homepage": ".",
   "private": true,
   "devDependencies": {

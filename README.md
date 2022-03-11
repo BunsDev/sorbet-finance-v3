@@ -1,14 +1,12 @@
-# Sorbet Finance Interface
+# SoulSwap Finance Limit Orders Interface
 
-[![Lint](https://github.com/gelatodigital/sorbet-finance-v3/actions/workflows/lint.yml/badge.svg)](https://github.com/gelatodigital/sorbet-finance-v3/actions/workflows/lint.yml)
+Interface for SoulSwap Finance Limit Orders.
 
-Interface for Sorbet Finance.
+- Website: [SoulSwap.finance](https://SoulSwap.finance/)
 
-- Website: [sorbet.finance](https://sorbet.finance/)
+## Accessing the SoulSwap Finance Interface
 
-## Accessing the Sorbet Finance Interface
-
-To access the Uniswap Interface visit [sorbet.finance](https://sorbet.finance/).
+To access the SoulSwap Interface visit [app.SoulSwap.finance](https://app.SoulSwap.finance/).
 
 ## Development
 

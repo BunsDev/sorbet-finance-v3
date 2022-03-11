@@ -7,7 +7,7 @@ import getLibrary from '../utils/getLibrary'
 
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
-import SORBET_LOGO_URL from '../assets/svg/logo.svg'
+// import SORBET_LOGO_URL from '../assets/svg/logo.svg'
 
 const INFURA_KEY = process.env.REACT_APP_INFURA_KEY
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
@@ -26,9 +26,10 @@ const NETWORK_URLS: {
   // [5]: `https://goerli.infura.io/v3/${INFURA_KEY}`,
   // [42]: `https://kovan.infura.io/v3/${INFURA_KEY}`,
   [137]: 'https://rpc-mainnet.matic.network',
+  [260]: 'https://rpc.ftm.tools',
 }
 
-const SUPPORTED_CHAIN_IDS = [1, 3, 137]
+const SUPPORTED_CHAIN_IDS = [1, 3, 137, 250]
 
 export const network = new NetworkConnector({
   urls: NETWORK_URLS,
@@ -67,6 +68,7 @@ export const portis = new PortisConnector({
 // mainnet only
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URLS[1],
-  appName: 'Sorbet',
-  appLogoUrl: SORBET_LOGO_URL,
+  appName: 'SoulSwap',
+  appLogoUrl: 
+  'https://raw.github.com/SoulSwapFinance/icons/master/token/soul.jpg',
 })
