@@ -1,19 +1,19 @@
 import useScrollPosition from '@react-hook/window-scroll'
 import React from 'react'
 import { Text } from 'rebass'
-import { NavLink } from 'react-router-dom'
-import { darken } from 'polished'
+// import { NavLink } from 'react-router-dom'
+// import { darken } from 'polished'
 import { Moon, Sun } from 'react-feather'
 import styled from 'styled-components/macro'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
-import SorbetLogo from '../../assets/images/sorbet-logo.png'
-import SorbetLogoOnly from '../../assets/images/sorbet_logo_no_text.png'
-import { isMobile } from 'react-device-detect'
+// import SorbetLogo from '../../assets/images/sorbet-logo.png'
+// import SorbetLogoOnly from '../../assets/images/sorbet_logo_no_text.png'
+// import { isMobile } from 'react-device-detect'
 import { YellowCard } from '../Card'
 import Menu from '../Menu'
-import Row, { RowFixed } from '../Row'
+// import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
@@ -92,26 +92,26 @@ const HeaderElementWrap = styled.div`
   align-items: center;
 `
 
-const HeaderRow = styled(RowFixed)`
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-   width: 100%;
-  `};
-`
+// const HeaderRow = styled(RowFixed)`
+//   ${({ theme }) => theme.mediaWidth.upToMedium`
+//    width: 100%;
+//   `};
+// `
 
-const HeaderLinks = styled(Row)`
-  justify-self: center;
-  background-color: ${({ theme }) => theme.bg0};
-  width: fit-content;
-  padding: 4px;
-  border-radius: 16px;
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 10px;
-  overflow: auto;
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    justify-self: flex-end;
-  `};
-`
+// const HeaderLinks = styled(Row)`
+//   justify-self: center;
+//   background-color: ${({ theme }) => theme.bg0};
+//   width: fit-content;
+//   padding: 4px;
+//   border-radius: 16px;
+//   display: grid;
+//   grid-auto-flow: column;
+//   grid-gap: 10px;
+//   overflow: auto;
+//   ${({ theme }) => theme.mediaWidth.upToMedium`
+//     justify-self: flex-end;
+//   `};
+// `
 
 const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
@@ -176,56 +176,56 @@ const BalanceText = styled(Text)`
   `};
 `
 
-const Title = styled.a`
-  display: flex;
-  align-items: center;
-  pointer-events: auto;
-  justify-self: flex-start;
-  margin-right: 12px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    justify-self: center;
-  `};
-  :hover {
-    cursor: pointer;
-  }
-`
+// const Title = styled.a`
+//   display: flex;
+//   align-items: center;
+//   pointer-events: auto;
+//   justify-self: flex-start;
+//   margin-right: 12px;
+//   ${({ theme }) => theme.mediaWidth.upToSmall`
+//     justify-self: center;
+//   `};
+//   :hover {
+//     cursor: pointer;
+//   }
+// `
 
-const SorbetIcon = styled.div`
-  transition: transform 0.3s ease;
-  // :hover {
-  //   transform: rotate(-5deg);
-  // }
-`
+// const SorbetIcon = styled.div`
+//   transition: transform 0.3s ease;
+//   // :hover {
+//   //   transform: rotate(-5deg);
+//   // }
+// `
 
-const activeClassName = 'ACTIVE'
+// const activeClassName = 'ACTIVE'
 
-const StyledNavLink = styled(NavLink).attrs({
-  activeClassName,
-})`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 3rem;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
-  width: fit-content;
-  font-weight: 500;
-  padding: 8px 12px;
+// const StyledNavLink = styled(NavLink).attrs({
+//   activeClassName,
+// })`
+//   ${({ theme }) => theme.flexRowNoWrap}
+//   align-items: left;
+//   border-radius: 3rem;
+//   outline: none;
+//   cursor: pointer;
+//   text-decoration: none;
+//   color: ${({ theme }) => theme.text2};
+//   font-size: 1rem;
+//   width: fit-content;
+//   font-weight: 500;
+//   padding: 8px 12px;
 
-  &.${activeClassName} {
-    border-radius: 12px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text1};
-    background-color: ${({ theme }) => theme.bg2};
-  }
+//   &.${activeClassName} {
+//     border-radius: 12px;
+//     font-weight: 600;
+//     color: ${({ theme }) => theme.text1};
+//     background-color: ${({ theme }) => theme.bg2};
+//   }
 
-  :hover,
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-`
+//   :hover,
+//   :focus {
+//     color: ${({ theme }) => darken(0.1, theme.text1)};
+//   }
+// `
 
 // const StyledExternalLink = styled(ExternalLink).attrs({
 //   activeClassName,
@@ -307,7 +307,7 @@ export default function Header() {
 
   return (
     <HeaderFrame showBackground={scrollY > 45}>
-      <HeaderRow>
+      {/* <HeaderRow>
         {isMobile ? (
           <Title href=".">
             <SorbetIcon>
@@ -321,18 +321,11 @@ export default function Header() {
             </SorbetIcon>
           </Title>
         )}
-      </HeaderRow>
-      <HeaderLinks>
+      </HeaderRow> */}
+      {/* <HeaderLinks>
         <StyledNavLink id={`limit-order-nav-link`} to={'/limit-order'}>
           Limit Orders
-        </StyledNavLink>
-        <StyledNavLink id={`dca-nav-link`} to={'/dca'}>
-          DCA (soon)
-        </StyledNavLink>
-        <StyledNavLink id={`pools-nav-link`} to={'/pools'}>
-          Pools (soon)
-        </StyledNavLink>
-      </HeaderLinks>
+      </StyledNavLink> */}
       <HeaderControls>
         <HeaderElement>
           <HideSmall>
@@ -344,7 +337,7 @@ export default function Header() {
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                {userEthBalance?.toSignificant(4)} {chainId === 137 ? 'MATIC' : 'ETH'}
+                {userEthBalance?.toSignificant(4)} {chainId === 250 ? 'FTM' : 'ETH'}
               </BalanceText>
             ) : null}
             <Web3Status />
