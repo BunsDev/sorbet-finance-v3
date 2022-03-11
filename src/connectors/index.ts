@@ -26,7 +26,7 @@ const NETWORK_URLS: {
   // [5]: `https://goerli.infura.io/v3/${INFURA_KEY}`,
   // [42]: `https://kovan.infura.io/v3/${INFURA_KEY}`,
   [137]: 'https://rpc-mainnet.matic.network',
-  [260]: 'https://rpc.ftm.tools',
+  [250]: 'https://rpc.ftm.tools',
 }
 
 const SUPPORTED_CHAIN_IDS = [1, 3, 137, 250]
@@ -50,7 +50,7 @@ export const walletconnect = new WalletConnectConnector({
   infuraId: INFURA_KEY, // obviously a hack
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
-  pollingInterval: 15000,
+  // pollingInterval: 15000,
 })
 
 // mainnet only

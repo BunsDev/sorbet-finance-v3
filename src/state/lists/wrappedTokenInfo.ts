@@ -1,5 +1,6 @@
+import { ChainId } from '@gelatonetwork/limit-orders-lib'
 import { Currency, Token } from '@uniswap/sdk-core'
-import { Tags, TokenInfo } from '@uniswap/token-lists'
+import { Tags } from '@uniswap/token-lists'
 import { TokenList } from '@uniswap/token-lists/dist/types'
 import { isAddress } from '../../utils'
 
@@ -7,6 +8,20 @@ type TagDetails = Tags[keyof Tags]
 export interface TagInfo extends TagDetails {
   id: string
 }
+
+export interface TokenInfo {
+  readonly chainId: ChainId | number;
+  readonly address: string;
+  readonly name: string;
+  readonly decimals: number;
+  readonly symbol: string;
+  readonly logoURI?: string;
+  readonly tags?: string[];
+  readonly extensions?: {
+      readonly [key: string]: string | number | boolean | null;
+  };
+}
+
 /**
  * Token instances created from token info on a token list.
  */

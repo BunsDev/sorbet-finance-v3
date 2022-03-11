@@ -1,19 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import useScrollPosition from '@react-hook/window-scroll'
 import React from 'react'
 import { Text } from 'rebass'
 // import { NavLink } from 'react-router-dom'
 // import { darken } from 'polished'
-import { Moon, Sun } from 'react-feather'
+// import { Moon, Sun } from 'react-feather'
 import styled from 'styled-components/macro'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
-// import SorbetLogo from '../../assets/images/sorbet-logo.png'
-// import SorbetLogoOnly from '../../assets/images/sorbet_logo_no_text.png'
 // import { isMobile } from 'react-device-detect'
 import { YellowCard } from '../Card'
-import Menu from '../Menu'
-// import Row, { RowFixed } from '../Row'
+// import Menu from '../Menu'
+import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
@@ -54,7 +53,7 @@ const HeaderControls = styled.div`
   align-items: center;
   justify-self: flex-end;
 
-  ${({ theme }) => theme.mediaWidth.upToMedium`
+  ${({ theme }) => theme.mediaWidth.upToExtraLarge`
     flex-direction: row;
     justify-content: space-between;
     justify-self: center;
@@ -92,11 +91,11 @@ const HeaderElementWrap = styled.div`
   align-items: center;
 `
 
-// const HeaderRow = styled(RowFixed)`
-//   ${({ theme }) => theme.mediaWidth.upToMedium`
-//    width: 100%;
-//   `};
-// `
+const HeaderRow = styled(RowFixed)`
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+   width: 100%;
+  `};
+`
 
 // const HeaderLinks = styled(Row)`
 //   justify-self: center;
@@ -190,7 +189,7 @@ const BalanceText = styled(Text)`
 //   }
 // `
 
-// const SorbetIcon = styled.div`
+// const SoulSwap = styled.div`
 //   transition: transform 0.3s ease;
 //   // :hover {
 //   //   transform: rotate(-5deg);
@@ -310,15 +309,15 @@ export default function Header() {
       {/* <HeaderRow>
         {isMobile ? (
           <Title href=".">
-            <SorbetIcon>
-              <img width={'46px'} src={SorbetLogoOnly} alt="logo" />
-            </SorbetIcon>
+            <SoulSwapIcon>
+              <img width={'46px'} src={SoulSwapLogoOnly} alt="logo" />
+            </SoulSwapIcon>
           </Title>
         ) : (
           <Title href=".">
-            <SorbetIcon>
-              <img width={'174px'} src={SorbetLogo} alt="logo" />
-            </SorbetIcon>
+            <SoulSwapIcon>
+              <img width={'174px'} src={SoulSwapLogo} alt="logo" />
+            </SoulSwapIcon>
           </Title>
         )}
       </HeaderRow> */}
@@ -343,12 +342,12 @@ export default function Header() {
             <Web3Status />
           </AccountElement>
         </HeaderElement>
-        <HeaderElementWrap>
+        {/* <HeaderElementWrap>
           <StyledMenuButton onClick={() => toggleDarkMode()}>
             {darkMode ? <Moon size={20} /> : <Sun size={20} />}
           </StyledMenuButton>
           <Menu />
-        </HeaderElementWrap>
+        </HeaderElementWrap> */}
       </HeaderControls>
     </HeaderFrame>
   )

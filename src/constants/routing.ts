@@ -7,6 +7,7 @@ import {
   FRAX,
   FXS,
   MATIC_BASES,
+  FANTOM_BASES,
   MIR,
   renBTC,
   TRIBE,
@@ -17,6 +18,7 @@ import {
   UST,
   WBTC,
   WETH_MATIC,
+  WETH_FANTOM,
 } from './tokens'
 
 type ChainTokenList = {
@@ -54,12 +56,14 @@ const WETH_ONLY: ChainTokenList = {
   [5]: [WETH9[5]],
   [42]: [WETH9[42]],
   [137]: [WETH_MATIC],
+  [250]: [WETH_FANTOM],
 }
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
   [137]: MATIC_BASES,
+  [250]: FANTOM_BASES,
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   [1]: {
@@ -88,12 +92,14 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
 export const SUGGESTED_BASES: ChainCurrencyList = {
   [1]: [Ether.onChain(1), DAI, USDC, USDT, WBTC],
   [137]: MATIC_BASES,
+  [250]: FANTOM_BASES,
 }
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [1]: [...WETH_ONLY[1], DAI, USDC, USDT, WBTC],
-  [127]: MATIC_BASES,
+  [137]: MATIC_BASES,
+  [250]: FANTOM_BASES,
 }
 
 export const PINNED_PAIRS: { readonly [chainId: number]: [Token, Token][] } = {

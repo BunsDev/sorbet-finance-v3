@@ -13,7 +13,7 @@ import { TokenAddressMap, useUnsupportedTokenList } from './../state/lists/hooks
 import { useActiveWeb3React } from './web3'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
 import invariant from 'tiny-invariant'
-import { WMATIC_MATIC } from 'constants/tokens'
+import { WFTM_FANTOM } from 'constants/tokens'
 
 export const WETH9: { [chainId: number]: Token } = {
   [1]: new Token(1, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH9', 'Wrapped Ether'),
@@ -29,7 +29,7 @@ export class NativeToken extends NativeCurrency {
   }
 
   public get wrapped(): Token {
-    const weth9 = this.chainId === 137 ? WMATIC_MATIC : WETH9[this.chainId]
+    const weth9 = this.chainId === 250 ? WFTM_FANTOM : WETH9[this.chainId]
     invariant(!!weth9, 'WRAPPED')
     return weth9
   }
@@ -98,10 +98,10 @@ export function useSearchInactiveTokenLists(search: string | undefined, minResul
       const list = lists[url].current
       if (!list) continue
       for (const tokenInfo of list.tokens) {
-        if (tokenInfo.chainId === chainId && tokenFilter(tokenInfo)) {
-          const wrapped = new WrappedTokenInfo(tokenInfo, list)
-          if (!(wrapped.address in activeTokens) && !addressSet[wrapped.address]) {
-            addressSet[wrapped.address] = true
+        if (tokenInfo?.chainId === chainId && tokenFilter(tokenInfo)) {
+          const wrapped: WrappedTokenInfo = new WrappedTokenInfo(tokenInfo, list)
+          if (!(wrapped?.address in activeTokens) && !addressSet[wrapped?.address]) {
+            addressSet[wrapped?.address] = true
             result.push(wrapped)
             if (result.length >= minResults) return result
           }
